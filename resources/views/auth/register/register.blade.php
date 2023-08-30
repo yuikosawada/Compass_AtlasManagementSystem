@@ -94,7 +94,7 @@
           <label style="font-size:13px">年</label>
           <select class="old_month" name="old_month">
             <option value="none">-----</option>
-            <option value="01">2</option>
+            <option value="01">1</option>
             <option value="02">2</option>
             <option value="03">3</option>
             <option value="04">4</option>
