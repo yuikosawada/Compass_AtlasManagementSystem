@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,13 +20,31 @@
   <div class="d-flex">
     <div class="sidebar">
       @section('sidebar')
-      <p><a href="{{ route('top.show') }}">トップ</a></p>
-      <p><a href="/logout">ログアウト</a></p>
-      <p><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}">スクール予約</a></p>
-      <p><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}">スクール予約確認</a></p>
-      <p><a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}">スクール枠登録</a></p>
-      <p><a href="{{ route('post.show') }}">掲示板</a></p>
-      <p><a href="{{ route('user.show') }}">ユーザー検索</a></p>
+      <p>
+        <img src="image/home.png" class="sidebar_icon" alt="top"><a href="{{ route('top.show') }}">マイページ</a></img>
+      </p>
+      <p>
+        <img src="image/home.png" class="sidebar_icon" alt="logout"><a href="/logout">ログアウト</a></img>
+      </p>
+      <p>
+        <img src="image/home.png" class="sidebar_icon" alt="school"><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}">スクール予約</a></img>
+      </p>
+      <!-- 管理者のみ表示 -->
+      @if(Auth::id())
+     <p>
+        <img src="image/home.png" class="sidebar_icon" alt="school_comfirm"><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}">スクール予約確認</a></img>
+      </p>
+      <!-- 管理者のみ表示 -->
+      <p>
+        <img src="image/home.png" class="sidebar_icon" alt="school_register"><a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}">スクール枠登録</a></img>
+      </p>
+      @endif
+      <p>
+        <img src="image/home.png" class="sidebar_icon" alt="posts"><a href="{{ route('post.show') }}">掲示板</a></img>
+      </p>
+      <p>
+        <img src="image/home.png" class="sidebar_icon" alt="search"><a href="{{ route('user.show') }}">ユーザー検索</a></img>
+      </p>
       @show
     </div>
     <div class="main-container">
@@ -38,4 +57,5 @@
   <script src="{{ asset('js/user_search.js') }}" rel="stylesheet"></script>
   <script src="{{ asset('js/calendar.js') }}" rel="stylesheet"></script>
 </body>
+
 </html>

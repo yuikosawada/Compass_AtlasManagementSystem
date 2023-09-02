@@ -13,18 +13,27 @@ li {
     list-style: none;
 }
 
+.b-radius-10{
+    border-radius: 10px;
+}
+
 /* サイドバー */
 .sidebar {
-    width: 150px;
+    width: 200px;
     height: 100vh;
     background-color: #03aad2;
     font-weight: bold;
+    padding: 20px 5px;
+
 }
 .main-container {
     width: 100%;
 }
 .sidebar p a {
     color: #fff;
+}
+.sidebar p img.sidebar_icon{
+width: 20px;
 }
 
 /* ログイン */

@@ -60,7 +60,7 @@ class RegisterController extends Controller
     public function registerPost(Request $request)
     {
         DB::beginTransaction();
-        try{
+        try {
             $old_year = $request->old_year;
             $old_month = $request->old_month;
             $old_day = $request->old_day;
@@ -68,22 +68,60 @@ class RegisterController extends Controller
             $birth_day = date('Y-m-d', strtotime($data));
             $subjects = $request->subject;
 
-            $user_get = User::create([
-                'over_name' => $request->over_name,
-                'under_name' => $request->under_name,
-                'over_name_kana' => $request->over_name_kana,
-                'under_name_kana' => $request->under_name_kana,
-                'mail_address' => $request->mail_address,
-                'sex' => $request->sex,
-                'birth_day' => $birth_day,
-                'role' => $request->role,
-                'password' => bcrypt($request->password)
-            ]);
+            // バリデーション
+          
+
+            $messages = [
+                'required' => ':attributeは必須項目です。',
+                'string' => ':attributeは文字列の型である必要があります。',
+                'max' => ':attributeは:max文字以下である必要があります。',
+                'email' => ':attributeは有効なメールアドレスである必要があります。',
+                'unique' => ':attributeは既に登録されています。',
+                'katakana' => ':attributeはカタカナのみである必要があります。',
+                'date' => ':attributeは正しい日付である必要があります。',
+                'in' => ':attributeは:valuesのいずれかである必要があります。',
+                'min' => ':attributeは:min文字以上である必要があります。',
+                'max' => ':attributeは:max文字以下である必要があります。',
+                'same' => ':attributeと:otherは同じである必要があります。',
+            ];
+
+            $validator = Validator::make($data, $rules, $messages);
+
+            if ($validator->fails()) {
+                // バリデーションエラー
+                echo $messages;
+            } else {
+                // バリデーションOK
+                $user_get = User::create([
+                    'over_name' => $request->over_name,
+                    'under_name' => $request->under_name,
+                    'over_name_kana' => $request->over_name_kana,
+                    'under_name_kana' => $request->under_name_kana,
+                    'mail_address' => $request->mail_address,
+                    'sex' => $request->sex,
+                    'birth_day' => $birth_day,
+                    'role' => $request->role,
+                    'password' => bcrypt($request->password)
+                ]);
+            }
+            // ここまで
+
+            // $user_get = User::create([
+            //     'over_name' => $request->over_name,
+            //     'under_name' => $request->under_name,
+            //     'over_name_kana' => $request->over_name_kana,
+            //     'under_name_kana' => $request->under_name_kana,
+            //     'mail_address' => $request->mail_address,
+            //     'sex' => $request->sex,
+            //     'birth_day' => $birth_day,
+            //     'role' => $request->role,
+            //     'password' => bcrypt($request->password)
+            // ]);
             $user = User::findOrFail($user_get->id);
             $user->subjects()->attach($subjects);
             DB::commit();
             return view('auth.login.login');
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             DB::rollback();
             return redirect()->route('loginView');
         }
