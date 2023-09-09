@@ -17,6 +17,6 @@ class Subjects extends Model
 
     public function users()
     {
-        return $this->belongsToMany(Users::class, 'subjects_users', 'subject_id', 'user_id');
+        return $this->belongsToMany('App\Models\Users\User', 'subject_users', 'subject_id', 'user_id');
     }
 }

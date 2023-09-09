@@ -32,9 +32,11 @@ li {
 .sidebar p a {
     color: #fff;
 }
-.sidebar p img.sidebar_icon{
+.sidebar p .sidebar_icon{
 width: 20px;
+color: #fff;
 }
+
 
 /* ログイン */
 .box-shadow {

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use DB;
+use App\Http\Requests\BulletinBoard\PostFormRequest;
 
 use App\Models\Users\Subjects;
 
@@ -57,7 +58,7 @@ class RegisterController extends Controller
         return view('auth.register.register', compact('subjects'));
     }
 
-    public function registerPost(Request $request)
+    public function registerPost(PostFormRequest $request)
     {
         DB::beginTransaction();
         try {
@@ -68,30 +69,13 @@ class RegisterController extends Controller
             $birth_day = date('Y-m-d', strtotime($data));
             $subjects = $request->subject;
 
-            // バリデーション
-          
 
-            $messages = [
-                'required' => ':attributeは必須項目です。',
-                'string' => ':attributeは文字列の型である必要があります。',
-                'max' => ':attributeは:max文字以下である必要があります。',
-                'email' => ':attributeは有効なメールアドレスである必要があります。',
-                'unique' => ':attributeは既に登録されています。',
-                'katakana' => ':attributeはカタカナのみである必要があります。',
-                'date' => ':attributeは正しい日付である必要があります。',
-                'in' => ':attributeは:valuesのいずれかである必要があります。',
-                'min' => ':attributeは:min文字以上である必要があります。',
-                'max' => ':attributeは:max文字以下である必要があります。',
-                'same' => ':attributeと:otherは同じである必要があります。',
-            ];
-
-            $validator = Validator::make($data, $rules, $messages);
-
-            if ($validator->fails()) {
-                // バリデーションエラー
-                echo $messages;
+            // バリデーションエラーの場合
+            if ($request->fails()) {
+                return redirect()->back()->withErrors($request->errors());
             } else {
-                // バリデーションOK
+                // バリデーションOKの場合
+                // ユーザーを登録する処理
                 $user_get = User::create([
                     'over_name' => $request->over_name,
                     'under_name' => $request->under_name,
@@ -104,7 +88,6 @@ class RegisterController extends Controller
                     'password' => bcrypt($request->password)
                 ]);
             }
-            // ここまで
 
             // $user_get = User::create([
             //     'over_name' => $request->over_name,
@@ -117,6 +100,7 @@ class RegisterController extends Controller
             //     'role' => $request->role,
             //     'password' => bcrypt($request->password)
             // ]);
+
             $user = User::findOrFail($user_get->id);
             $user->subjects()->attach($subjects);
             DB::commit();

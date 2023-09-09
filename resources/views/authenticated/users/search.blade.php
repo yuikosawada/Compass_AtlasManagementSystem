@@ -43,13 +43,12 @@
       </div>
       <div>
         @if($user->role == 4)
-        <span>選択科目 :</span><span>社会</span>
-        @elseif($user->role == 3)
-        <span>選択科目 :</span><span>数学</span>
-        @elseif($user->role == 2)
-        <span>選択科目 :</span><span>英語</span>
-        @else
-        <span>選択科目 :</span><span>国語</span>
+        <span>選択科目 :</span>
+        @foreach($user->subjects as $user)
+        <span>
+          {{$user->subject}}
+        </span>
+        @endforeach
         @endif
       </div>
     </div>
@@ -94,12 +93,6 @@
           </div>
           <div class="selected_engineer">
             <label>選択科目</label>
-            <select name="role" form="userSearchRequest" class="engineer">
-              <option selected disabled>----</option>
-              <option value="1">国語</option>
-              <option value="2">数学</option>
-              <option value="3">英語</option>
-            </select>
           </div>
         </div>
       </div>

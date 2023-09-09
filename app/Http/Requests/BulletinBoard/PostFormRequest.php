@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Requests\BulletinBoard;
-
 use Illuminate\Foundation\Http\FormRequest;
 
 class PostFormRequest extends FormRequest
@@ -37,7 +36,7 @@ class PostFormRequest extends FormRequest
             'old_month' => 'required|integer|between:1,12',
             'old_day' => 'required|integer|between:1,31',
             'role' => 'required|in:講師(国語),講師(数学),教師(英語),生徒',
-            'password' => 'required|min:8|max:30|same:password_confirmation',
+            'password' => 'required|min:8|max:30|same:password_confirmation'
 
         ];
     }
@@ -60,7 +59,9 @@ class PostFormRequest extends FormRequest
             'in' => ':attributeは:valuesのいずれかである必要があります。',
             'min' => ':attributeは:min文字以上である必要があります。',
             'max' => ':attributeは:max文字以下である必要があります。',
-            'same' => ':attributeと:otherは同じである必要があります。',
+            'same' => ':attributeと:otherは同じである必要があります。'
         ];
     }
+
+    
 }

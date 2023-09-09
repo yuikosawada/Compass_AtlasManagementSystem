@@ -14,6 +14,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&family=Oswald:wght@200&display=swap" rel="stylesheet">
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+
 </head>
 
 <body class="all_content">
@@ -24,13 +27,13 @@
         <img src="image/home.png" class="sidebar_icon" alt="top"><a href="{{ route('top.show') }}">マイページ</a></img>
       </p>
       <p>
-        <img src="image/home.png" class="sidebar_icon" alt="logout"><a href="/logout">ログアウト</a></img>
+        <i class="fa-solid fa-arrow-right-from-bracket"><a href="/logout">ログアウト</a></i>
       </p>
       <p>
         <img src="image/home.png" class="sidebar_icon" alt="school"><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}">スクール予約</a></img>
       </p>
       <!-- 管理者のみ表示 -->
-      @if(Auth::id())
+      @if(auth()->user()->role >= 1 && auth()->user()->role <= 3)
      <p>
         <img src="image/home.png" class="sidebar_icon" alt="school_comfirm"><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}">スクール予約確認</a></img>
       </p>
