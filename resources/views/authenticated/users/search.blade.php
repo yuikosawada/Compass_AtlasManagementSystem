@@ -93,6 +93,12 @@
           </div>
           <div class="selected_engineer">
             <label>選択科目</label>
+            <!-- 選択科目追加 -->
+            <div>
+              <p>国語<input type="checkbox" name="" id=""></p>
+              <p>数学<input type="checkbox" name="" id=""></p>
+              <p>英語<input type="checkbox" name="" id=""></p>
+            </div>
           </div>
         </div>
       </div>

@@ -146,6 +146,19 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'over_name' => '苗字',
+        'under_name' => '名前',
+        'over_name_kana' => 'フリガナ',
+        'under_name_kana' => 'フリガナ',
+        'mail_address' => 'メールアドレス',
+        'sex' => '性別',
+        'old_year' => '誕生年',
+        'old_month' =>'誕生月',
+        'old_day' => '誕生日',
+        'role' => '役職',
+        'password' => 'パスワード',
+        'password_confirmation'=>'確認用パスワード'
+    ],
 
 ];

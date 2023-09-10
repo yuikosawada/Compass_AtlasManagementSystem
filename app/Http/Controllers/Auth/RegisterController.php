@@ -71,35 +71,31 @@ class RegisterController extends Controller
 
 
             // バリデーションエラーの場合
-            if ($request->fails()) {
-                return redirect()->back()->withErrors($request->errors());
-            } else {
-                // バリデーションOKの場合
-                // ユーザーを登録する処理
-                $user_get = User::create([
-                    'over_name' => $request->over_name,
-                    'under_name' => $request->under_name,
-                    'over_name_kana' => $request->over_name_kana,
-                    'under_name_kana' => $request->under_name_kana,
-                    'mail_address' => $request->mail_address,
-                    'sex' => $request->sex,
-                    'birth_day' => $birth_day,
-                    'role' => $request->role,
-                    'password' => bcrypt($request->password)
-                ]);
-            }
+            // if ($request->fails()) {
+            //     return redirect()->back()->withErrors($request->errors());
+            // }
 
-            // $user_get = User::create([
-            //     'over_name' => $request->over_name,
-            //     'under_name' => $request->under_name,
-            //     'over_name_kana' => $request->over_name_kana,
-            //     'under_name_kana' => $request->under_name_kana,
-            //     'mail_address' => $request->mail_address,
-            //     'sex' => $request->sex,
-            //     'birth_day' => $birth_day,
-            //     'role' => $request->role,
-            //     'password' => bcrypt($request->password)
-            // ]);
+            if ($request->fails()) {
+                return back()
+                    ->withErrors($request)
+                    ->withInput();
+            };
+            // バリデーションOKの場合
+            // ユーザーを登録する処理
+            $user_get = User::create([
+                'over_name' => $request->over_name,
+                'under_name' => $request->under_name,
+                'over_name_kana' => $request->over_name_kana,
+                'under_name_kana' => $request->under_name_kana,
+                'mail_address' => $request->mail_address,
+                'sex' => $request->sex,
+                'birth_day' => $birth_day,
+                'role' => $request->role,
+                'password' => bcrypt($request->password)
+            ]);
+
+
+
 
             $user = User::findOrFail($user_get->id);
             $user->subjects()->attach($subjects);

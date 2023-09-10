@@ -24,29 +24,29 @@
     <div class="sidebar">
       @section('sidebar')
       <p>
-        <img src="image/home.png" class="sidebar_icon" alt="top"><a href="{{ route('top.show') }}">マイページ</a></img>
+      <i class="fa-solid fa-house" style="color: #ffffff;"></i><a href="{{ route('top.show') }}">マイページ</a>
       </p>
       <p>
-        <i class="fa-solid fa-arrow-right-from-bracket"><a href="/logout">ログアウト</a></i>
+      <i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffffff;"></i><a href="/logout">ログアウト</a>
       </p>
       <p>
-        <img src="image/home.png" class="sidebar_icon" alt="school"><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}">スクール予約</a></img>
+      <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}">スクール予約</a>
       </p>
       <!-- 管理者のみ表示 -->
       @if(auth()->user()->role >= 1 && auth()->user()->role <= 3)
      <p>
-        <img src="image/home.png" class="sidebar_icon" alt="school_comfirm"><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}">スクール予約確認</a></img>
+     <i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}">スクール予約確認</a>
       </p>
       <!-- 管理者のみ表示 -->
       <p>
-        <img src="image/home.png" class="sidebar_icon" alt="school_register"><a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}">スクール枠登録</a></img>
+      <i class="fa-solid fa-calendar-plus" style="color: #ffffff;"></i><a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}">スクール枠登録</a>
       </p>
       @endif
       <p>
-        <img src="image/home.png" class="sidebar_icon" alt="posts"><a href="{{ route('post.show') }}">掲示板</a></img>
+      <i class="fa-regular fa-comment-dots" style="color: #ffffff;"></i><a href="{{ route('post.show') }}">掲示板</a>
       </p>
       <p>
-        <img src="image/home.png" class="sidebar_icon" alt="search"><a href="{{ route('user.show') }}">ユーザー検索</a></img>
+      <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i><a href="{{ route('user.show') }}">ユーザー検索</a>
       </p>
       @show
     </div>
@@ -59,6 +59,8 @@
   <script src="{{ asset('js/bulletin.js') }}" rel="stylesheet"></script>
   <script src="{{ asset('js/user_search.js') }}" rel="stylesheet"></script>
   <script src="{{ asset('js/calendar.js') }}" rel="stylesheet"></script>
+  <!-- font awesome -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" integrity="sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>

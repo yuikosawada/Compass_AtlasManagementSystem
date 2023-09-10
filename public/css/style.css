@@ -17,6 +17,11 @@ li {
     border-radius: 10px;
 }
 
+.error{
+    color: #f33a3a;
+    font-size: 12px;
+}
+
 /* サイドバー */
 .sidebar {
     width: 200px;

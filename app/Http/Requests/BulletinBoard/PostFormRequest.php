@@ -15,6 +15,29 @@ class PostFormRequest extends FormRequest
         return true;
     }
 
+
+     /**
+     *  rules()の前に実行される
+     *       $this->merge(['key' => $value])を実行すると、
+     *       フォームで送信された(key, value)の他に任意の(key, value)の組み合わせをrules()に渡せる
+     */
+    public function getValidatorInstance()
+    {
+        // プルダウンで選択された値(= 配列)を取得
+        $birth_day = $this->input('birth_day', array()); //デフォルト値は空の配列
+
+        // 日付を作成(ex. 2020-1-20)
+        $birth_day_validation = implode('-', $birth_day);
+
+        // rules()に渡す値を追加でセット
+        //     これで、この場で作った変数にもバリデーションを設定できるようになる
+        $this->merge([
+            'birth_day_validation' => $birth_day_validation,
+        ]);
+
+        return parent::getValidatorInstance();
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -31,11 +54,9 @@ class PostFormRequest extends FormRequest
             'over_name_kana' => 'required|string|katakana|max:30',
             'under_name_kana' => 'required|string|katakana|max:30',
             'mail_address' => 'required|email|unique:users|max:100',
-            'sex' => 'required|in:男性,女性,その他',
-            'old_year' => 'required|date|before:today',
-            'old_month' => 'required|integer|between:1,12',
-            'old_day' => 'required|integer|between:1,31',
-            'role' => 'required|in:講師(国語),講師(数学),教師(英語),生徒',
+            'sex' => 'required|integer',
+            'birth_day_validation' => 'date', // 正しい日付かどうかをチェック(ex. 2020-2-30はNG)
+            'role' => 'required|integer',
             'password' => 'required|min:8|max:30|same:password_confirmation'
 
         ];
@@ -59,7 +80,8 @@ class PostFormRequest extends FormRequest
             'in' => ':attributeは:valuesのいずれかである必要があります。',
             'min' => ':attributeは:min文字以上である必要があります。',
             'max' => ':attributeは:max文字以下である必要があります。',
-            'same' => ':attributeと:otherは同じである必要があります。'
+            'same' => ':attributeと:otherは同じである必要があります。',
+            'integer' =>':attributeは整数を入力して下さい'
         ];
     }
 
