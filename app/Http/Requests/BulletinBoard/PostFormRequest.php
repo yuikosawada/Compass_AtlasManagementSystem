@@ -54,9 +54,9 @@ class PostFormRequest extends FormRequest
             'over_name_kana' => 'required|string|katakana|max:30',
             'under_name_kana' => 'required|string|katakana|max:30',
             'mail_address' => 'required|email|unique:users|max:100',
-            'sex' => 'required|integer',
+            'sex' => 'required|regex:/^[1-3]$/',
             'birth_day_validation' => 'date', // 正しい日付かどうかをチェック(ex. 2020-2-30はNG)
-            'role' => 'required|integer',
+            'role' => 'required|regex:/^[1-4]$/',
             'password' => 'required|min:8|max:30|same:password_confirmation'
 
         ];
