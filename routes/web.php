@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// タイムアウトしたらログインページに戻る
 Route::get('/', function () {
     return view('auth.login.login');
 })->name('login');

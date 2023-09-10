@@ -72,7 +72,6 @@ class PostFormRequest extends FormRequest
 
             'required' => ':attributeは必須項目です。',
             'string' => ':attributeは文字列の型である必要があります。',
-            'max' => ':attributeは:max文字以下である必要があります。',
             'email' => ':attributeは有効なメールアドレスである必要があります。',
             'unique' => ':attributeは既に登録されています。',
             'katakana' => ':attributeはカタカナのみである必要があります。',
