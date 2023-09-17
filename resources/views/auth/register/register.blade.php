@@ -75,7 +75,7 @@
           <label style="font-size:13px">その他</label>
         </div>
         <div class="mt-3">
-          @if ($errors->has('birth_day_validation'))
+          @if ($errors->has('birth_day'))
           <p class="error">{{ $errors->first('birth_day') }} </p> @endif
           <label class="d-block m-0 aa" style="font-size:13px">生年月日</label>
           <select class="old_year" name="old_year">
@@ -125,9 +125,8 @@
             <option value="11">11</option>
             <option value="12">12</option>
           </select>
-
-         
           <label style="font-size:13px">月</label>
+          
           <select class="old_day" name="old_day">
             <option value="none">-----</option>
             <option value="01">1</option>

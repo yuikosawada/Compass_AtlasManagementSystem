@@ -69,7 +69,6 @@ class RegisterController extends Controller
             $birth_day = date('Y-m-d', strtotime($data));
             $subjects = $request->subject;
 
-            
             // PostFormRequestでバリデーションに引っかかったものの表示までしてくれているので、RegisterControllerには登録処理のみでOK
                 // バリデーションOKの場合
                 // ユーザーを登録する処理

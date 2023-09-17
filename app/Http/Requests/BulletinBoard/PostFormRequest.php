@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Requests\BulletinBoard;
+
+use Error;
 use Illuminate\Foundation\Http\FormRequest;
+
 
 class PostFormRequest extends FormRequest
 {
@@ -16,23 +19,28 @@ class PostFormRequest extends FormRequest
     }
 
 
-     /**
+    /**
      *  rules()の前に実行される
      *       $this->merge(['key' => $value])を実行すると、
      *       フォームで送信された(key, value)の他に任意の(key, value)の組み合わせをrules()に渡せる
      */
     public function getValidatorInstance()
     {
+
         // プルダウンで選択された値(= 配列)を取得
-        $birth_day = $this->input('birth_day', array()); //デフォルト値は空の配列
+        // フォームから日付情報を取得
+        $year = $this->input('old_year');
+        $month = $this->input('old_month');
+        $date = $this->input('old_day');
+
+        $birth_day = [$year, $month, $date];
 
         // 日付を作成(ex. 2020-1-20)
-        $birth_day_validation = implode('-', $birth_day);
-
+        $birth_day = implode('-', $birth_day);
         // rules()に渡す値を追加でセット
-        //     これで、この場で作った変数にもバリデーションを設定できるようになる
+        // これで、この場で作った変数にもバリデーションを設定できるようになる
         $this->merge([
-            'birth_day_validation' => $birth_day_validation,
+            'birth_day' => $birth_day,
         ]);
 
         return parent::getValidatorInstance();
@@ -45,6 +53,7 @@ class PostFormRequest extends FormRequest
      */
     public function rules()
     {
+        
         return [
             'post_title' => 'min:4|max:50',
             'post_body' => 'min:10|max:500',
@@ -55,7 +64,12 @@ class PostFormRequest extends FormRequest
             'under_name_kana' => 'required|string|katakana|max:30',
             'mail_address' => 'required|email|unique:users|max:100',
             'sex' => 'required|regex:/^[1-3]$/',
-            'birth_day_validation' => 'date', // 正しい日付かどうかをチェック(ex. 2020-2-30はNG)
+
+            'old_year' => 'valid_date_range',
+            'birth_day' => [
+                'date',
+                'valid_date_range', // あなたの独自のカスタムバリデーションルール
+            ],
             'role' => 'required|regex:/^[1-4]$/',
             'password' => 'required|min:8|max:30|same:password_confirmation'
 
@@ -80,9 +94,9 @@ class PostFormRequest extends FormRequest
             'min' => ':attributeは:min文字以上である必要があります。',
             'max' => ':attributeは:max文字以下である必要があります。',
             'same' => ':attributeと:otherは同じである必要があります。',
-            'integer' =>':attributeは整数を入力して下さい'
+            'integer' => ':attributeは整数を入力して下さい',
+            'valid_date_range' => '2000年以前、もしくは日付が有効でない為、登録出来ません。'
+
         ];
     }
-
-    
 }

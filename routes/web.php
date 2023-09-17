@@ -11,9 +11,9 @@
 |
 */
 // タイムアウトしたらログインページに戻る
-Route::get('/', function () {
-    return view('auth.login.login');
-})->name('login');
+// Route::get('/', function () {
+//     return view('auth.login.login');
+// })->name('login');
 
 Route::group(['middleware' => ['guest']], function () {
     Route::namespace('Auth')->group(function () {
