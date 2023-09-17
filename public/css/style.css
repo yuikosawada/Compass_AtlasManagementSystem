@@ -119,9 +119,7 @@ color: #fff;
 }
 
 /* 掲示板 */
-.sub_categories {
-    display: none;
-}
+
 .post_create_area {
     background: #fff;
     border-radius: 10px;
