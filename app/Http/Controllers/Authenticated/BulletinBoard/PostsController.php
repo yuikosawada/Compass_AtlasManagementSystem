@@ -11,6 +11,7 @@ use App\Models\Posts\PostComment;
 use App\Models\Posts\Like;
 use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
+use App\Http\Requests\BulletinBoard\PostCreateFormRequest;
 use Auth;
 
 class PostsController extends Controller
@@ -52,7 +53,7 @@ class PostsController extends Controller
         return view('authenticated.bulletinboard.post_create', compact('main_categories', 'sub_categories'));
     }
 
-    public function postCreate(PostFormRequest $request)
+    public function postCreate(PostCreateFormRequest $request)
     {
         $post = Post::create([
             'user_id' => Auth::id(),
@@ -76,14 +77,23 @@ class PostsController extends Controller
         Post::findOrFail($id)->delete();
         return redirect()->route('post.show');
     }
-    public function mainCategoryCreate(Request $request)
+    public function mainCategoryCreate(PostFormRequest $request)
     {
-        MainCategory::create(['main_category' => $request->main_category_name]);
-        return redirect()->route('post.input');
+        // MainCategory::create(['main_category' => $request->main_category_name]);
+        // return redirect()->route('post.input');
+
+        try {
+            MainCategory::create(['main_category' => $request->main_category_name]);
+            return redirect()->route('post.input');
+        } catch (\Exception $e) {
+            return redirect()->back();
+        }
     }
     //サブカテゴリ作成
     public function subCategoryCreate(Request $request)
     {
+        // PostFormRequestでバリデーションに引っかかったものの表示までしてくれているので、RegisterControllerには登録処理のみでOK
+
         $main_category = $request->main_category_id;
         SubCategory::create(
             [

@@ -53,10 +53,10 @@ class PostFormRequest extends FormRequest
      */
     public function rules()
     {
-        
+
         return [
-            'post_title' => 'min:4|max:50',
-            'post_body' => 'min:10|max:500',
+            // 'post_title' => 'min:4|max:50',
+            // 'post_body' => 'min:10|max:500',
 
             'over_name' => 'required|string|max:10',
             'under_name' => 'required|string|max:10',
@@ -64,7 +64,6 @@ class PostFormRequest extends FormRequest
             'under_name_kana' => 'required|string|katakana|max:30',
             'mail_address' => 'required|email|unique:users|max:100',
             'sex' => 'required|regex:/^[1-3]$/',
-
             'old_year' => 'valid_date_range',
             'birth_day' => [
                 'date',
@@ -79,12 +78,12 @@ class PostFormRequest extends FormRequest
     public function messages()
     {
         return [
-            'post_title.min' => 'タイトルは4文字以上入力してください。',
-            'post_title.max' => 'タイトルは50文字以内で入力してください。',
-            'post_body.min' => '内容は10文字以上入力してください。',
-            'post_body.max' => '最大文字数は500文字です。',
+            // 'post_title.min' => 'タイトルは4文字以上入力してください。',
+            // 'post_title.max' => 'タイトルは50文字以内で入力してください。',
+            // 'post_body.min' => '内容は10文字以上入力してください。',
+            // 'post_body.max' => '最大文字数は500文字です。',
 
-            'required' => ':attributeは必須項目です。',
+            'required' => ':attributeは必ず入力してください。',
             'string' => ':attributeは文字列の型である必要があります。',
             'email' => ':attributeは有効なメールアドレスである必要があります。',
             'unique' => ':attributeは既に登録されています。',

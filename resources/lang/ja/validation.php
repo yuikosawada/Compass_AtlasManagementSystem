@@ -147,6 +147,10 @@ return [
     */
 
     'attributes' => [
+        // 投稿用
+        'post_body'=>'投稿内容',
+        'post_title'=>'タイトル',
+        // ユーザー登録用
         'over_name' => '苗字',
         'under_name' => '名前',
         'over_name_kana' => 'フリガナ',
