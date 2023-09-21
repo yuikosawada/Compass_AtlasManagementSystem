@@ -22,6 +22,9 @@ class PostsController extends Controller
         $categories = MainCategory::get();
         $like = new Like;
         $post_comment = new Post;
+        // $post_sub_category = PostSubCategory::get('id');
+        // $sub_category =  new SubCategory;
+
         if (!empty($request->keyword)) {
             $posts = Post::with('user', 'postComments')
                 ->where('post_title', 'like', '%' . $request->keyword . '%')
@@ -36,6 +39,12 @@ class PostsController extends Controller
         } else if ($request->my_posts) {
             $posts = Post::with('user', 'postComments')
                 ->where('user_id', Auth::id())->get();
+        } else if ($request->sub_categories) {
+            // サブカテゴリで絞り込む処理
+            // $subCategoryId = $request->sub_categories;
+            // $posts = Post::with('user', 'postComments')->where('sub_category_id', $sub_category_id);
+
+            // Post::with('user', 'postComments')->where('sub_category', $request->input('sub_categories'));
         }
         return view('authenticated.bulletinboard.posts', compact('posts', 'categories', 'like', 'post_comment'));
     }
@@ -60,6 +69,11 @@ class PostsController extends Controller
             'post_title' => $request->post_title,
             'post' => $request->post_body
         ]);
+        // サブカテゴリと記事を紐づけ（中間テーブルに記録）
+        $post = Post::first();
+        $sub_category_id = $request->post_category_id;
+        $post->subCategories()->attach($sub_category_id);
+
         return redirect()->route('post.show');
     }
 
@@ -113,7 +127,28 @@ class PostsController extends Controller
             'user_id' => Auth::id(),
             'comment' => $request->comment
         ]);
+
         return redirect()->route('post.detail', ['id' => $request->post_id]);
+    }
+   
+    public function commentCounts($post_id)
+    {
+        // 特定の投稿のコメント数を取得するために、$post_id を使用
+    
+        // まず、指定された $post_id に対応する投稿を取得
+        $post = Post::find($post_id);
+    
+        // もし投稿が存在する場合
+        if ($post) {
+            // 投稿に紐づくコメント数を取得
+            $commentCount = $post->postComments->count();
+            
+            // コメント数をビューに渡す
+            return view('auth.authenticated.bulletinboard.posts', ['commentCount' => $commentCount]);
+        } else {
+            // 投稿が見つからない場合の処理（エラーを表示するか、リダイレクトするか、他の適切な処理）
+            return redirect()->back(); // 例: リダイレクト先を指定
+        }
     }
 
     public function myBulletinBoard()
@@ -144,7 +179,7 @@ class PostsController extends Controller
 
         return response()->json();
     }
-
+    
     public function postUnLike(Request $request)
     {
         $user_id = Auth::id();

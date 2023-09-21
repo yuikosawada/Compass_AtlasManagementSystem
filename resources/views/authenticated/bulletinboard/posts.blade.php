@@ -11,13 +11,14 @@
       <div class="post_bottom_area d-flex">
         <div class="d-flex post_status">
           <div class="mr-5">
-            <i class="fa fa-comment"></i><span class=""></span>
+            <i class="fa fa-comment"></i><span class="comment_counts{{ $post->id }}">{{ commentCounts($post->id) }}</span>
           </div>
+
           <div>
             @if(Auth::user()->is_Like($post->id))
             <p class="m-0"><i class="fas fa-heart un_like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}"></span></p>
             @else
-            <p class="m-0"><i class="fas fa-heart like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}"></span></p>
+            <p class="m-0"><i class="fas fa-heart like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}">{{ $post->likeCounts}}</span></p>
             @endif
           </div>
         </div>
@@ -40,8 +41,8 @@
           <span>{{ $category->main_category }}<span>
         </li>
         @foreach($category->subCategories as $sub_category)
-        <input type="submit" name="sub_category" class="category_btn" value=" {{ $sub_category->sub_category }}" form="postSearchRequest" category_id="{{ $sub_category->id }}">
-         
+        <input type="submit" name="sub_categories" class="category_btn" value=" {{ $sub_category->sub_category }}" form="postSearchRequest" category_id="{{ $sub_category->id }}">
+
         </input>
         @endforeach
         @endforeach

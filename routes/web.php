@@ -46,7 +46,11 @@ Route::group(['middleware' => 'auth'], function () {
         });
         Route::namespace('BulletinBoard')->group(function () {
             Route::get('/bulletin_board/posts/{keyword?}', 'PostsController@show')->name('post.show');
-            Route::get('/bulletin_board/input', 'PostsController@postInput')->name('post.input');
+            Route::get('/bulletin_board/posts', 'PostsController@show')->name('post.show');
+            // コメントカウント
+            Route::get('/bulletin_board/posts', 'PostsController@commentCounts');
+            Route::post('/bulletin_board/posts', 'PostsController@commentCounts');
+
             Route::get('/bulletin_board/like', 'PostsController@likeBulletinBoard')->name('like.bulletin.board');
             Route::get('/bulletin_board/my_post', 'PostsController@myBulletinBoard')->name('my.bulletin.board');
             Route::post('/bulletin_board/create', 'PostsController@postCreate')->name('post.create');
