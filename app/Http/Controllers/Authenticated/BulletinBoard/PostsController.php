@@ -12,6 +12,7 @@ use App\Models\Posts\Like;
 use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
 use App\Http\Requests\BulletinBoard\PostCreateFormRequest;
+use App\Models\Users\Subjects;
 use Auth;
 
 class PostsController extends Controller
@@ -25,6 +26,8 @@ class PostsController extends Controller
         // $post_sub_category = PostSubCategory::get('id');
         // $sub_category =  new SubCategory;
 
+        $subjects = Subjects::with('users')->get();
+        
         if (!empty($request->keyword)) {
             $posts = Post::with('user', 'postComments')
                 ->where('post_title', 'like', '%' . $request->keyword . '%')
@@ -46,7 +49,7 @@ class PostsController extends Controller
 
             // Post::with('user', 'postComments')->where('sub_category', $request->input('sub_categories'));
         }
-        return view('authenticated.bulletinboard.posts', compact('posts', 'categories', 'like', 'post_comment'));
+        return view('authenticated.bulletinboard.posts', compact('posts', 'categories', 'like', 'post_comment','subjects'));
     }
 
     public function postDetail($post_id)
@@ -130,8 +133,8 @@ class PostsController extends Controller
 
         return redirect()->route('post.detail', ['id' => $request->post_id]);
     }
-   
-    
+
+
 
     public function myBulletinBoard()
     {
@@ -148,20 +151,47 @@ class PostsController extends Controller
         return view('authenticated.bulletinboard.post_like', compact('posts', 'like'));
     }
 
+    // public function postLike(Request $request)
+    // {
+    //     $user_id = Auth::id();
+    //     $post_id = $request->post_id;
+
+
+    //     $like = new Like;
+
+
+    //     $like->like_user_id = $user_id;
+    //     $like->like_post_id = $post_id;
+    //     $like->save();
+
+    //     return response()->json();
+    // }
     public function postLike(Request $request)
     {
         $user_id = Auth::id();
         $post_id = $request->post_id;
 
-        $like = new Like;
 
-        $like->like_user_id = $user_id;
-        $like->like_post_id = $post_id;
-        $like->save();
+        $like = new Like;
+        // すでにいいねが存在するか確認
+        $existingLike = Like::where('like_user_id', $user_id)
+            ->where('like_post_id', $post_id)
+            ->first();
+
+        if (!$existingLike) {
+            // まだいいねしていない場合、新しいいいねを作成
+            $like = new Like;
+            $like->like_user_id = $user_id;
+            $like->like_post_id = $post_id;
+            $like->save();
+        } else {
+            // すでにいいねしている場合、いいねを取り消す
+            $existingLike->delete();
+        }
 
         return response()->json();
     }
-    
+
     public function postUnLike(Request $request)
     {
         $user_id = Auth::id();
