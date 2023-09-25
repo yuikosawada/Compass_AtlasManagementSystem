@@ -131,25 +131,7 @@ class PostsController extends Controller
         return redirect()->route('post.detail', ['id' => $request->post_id]);
     }
    
-    public function commentCounts($post_id)
-    {
-        // 特定の投稿のコメント数を取得するために、$post_id を使用
     
-        // まず、指定された $post_id に対応する投稿を取得
-        $post = Post::find($post_id);
-    
-        // もし投稿が存在する場合
-        if ($post) {
-            // 投稿に紐づくコメント数を取得
-            $commentCount = $post->postComments->count();
-            
-            // コメント数をビューに渡す
-            return view('auth.authenticated.bulletinboard.posts', ['commentCount' => $commentCount]);
-        } else {
-            // 投稿が見つからない場合の処理（エラーを表示するか、リダイレクトするか、他の適切な処理）
-            return redirect()->back(); // 例: リダイレクト先を指定
-        }
-    }
 
     public function myBulletinBoard()
     {

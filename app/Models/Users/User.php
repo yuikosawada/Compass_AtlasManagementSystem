@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Models\Posts\Like;
+use App\Models\Posts\PostComment;
 use Auth;
 
 class User extends Authenticatable
@@ -76,6 +77,11 @@ class User extends Authenticatable
     // いいねしているかどうか
     public function is_Like($post_id){
         return Like::where('like_user_id', Auth::id())->where('like_post_id', $post_id)->first(['likes.id']);
+    }
+
+    // コメントしているかどうか
+    public function is_Comment($post_id){
+        return PostComment::where('post_id', $post_id)->first(['post_comments.post_id']);
     }
 
     public function likePostId(){

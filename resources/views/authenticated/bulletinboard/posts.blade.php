@@ -11,8 +11,14 @@
       <div class="post_bottom_area d-flex">
         <div class="d-flex post_status">
           <div class="mr-5">
-            <i class="fa fa-comment"></i><span class="comment_counts{{ $post->id }}">{{ commentCounts($post->id) }}</span>
+            @if(Auth::user()->is_Comment($post->id))
+
+            <i class="fa fa-comment" post_id="{{ $post->id }}"></i><span>{{ $post->commentCounts($post->id)}}</span>
+            @else
+            <i class="fa fa-comment" post_id="{{ $post->id }}"></i>
+            @endif
           </div>
+
 
           <div>
             @if(Auth::user()->is_Like($post->id))
@@ -28,7 +34,7 @@
   </div>
   <div class="other_area border w-25">
     <div class="border m-4">
-      <div class=""><a href="{{ route('post.input') }}">投稿</a></div>
+      <div class=""><a href="{{ route('post.create') }}">投稿</a></div>
       <div class="">
         <input type="text" placeholder="キーワードを検索" name="keyword" form="postSearchRequest">
         <input type="submit" value="検索" form="postSearchRequest">
