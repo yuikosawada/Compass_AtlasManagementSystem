@@ -27,7 +27,7 @@ class PostsController extends Controller
         // $sub_category =  new SubCategory;
 
         $subjects = Subjects::with('users')->get();
-        
+
         if (!empty($request->keyword)) {
             $posts = Post::with('user', 'postComments')
                 ->where('post_title', 'like', '%' . $request->keyword . '%')
@@ -44,12 +44,11 @@ class PostsController extends Controller
                 ->where('user_id', Auth::id())->get();
         } else if ($request->sub_categories) {
             // サブカテゴリで絞り込む処理
-            // $subCategoryId = $request->sub_categories;
-            // $posts = Post::with('user', 'postComments')->where('sub_category_id', $sub_category_id);
-
-            // Post::with('user', 'postComments')->where('sub_category', $request->input('sub_categories'));
+            $posts = Post::whereHas('subCategories', function ($query) use ($request) {
+                $query->where('sub_category', $request->sub_categories);
+            })->get();
         }
-        return view('authenticated.bulletinboard.posts', compact('posts', 'categories', 'like', 'post_comment','subjects'));
+        return view('authenticated.bulletinboard.posts', compact('posts', 'categories', 'like', 'post_comment', 'subjects'));
     }
 
     public function postDetail($post_id)
@@ -73,7 +72,6 @@ class PostsController extends Controller
             'post' => $request->post_body
         ]);
         // サブカテゴリと記事を紐づけ（中間テーブルに記録）
-        $post = Post::first();
         $sub_category_id = $request->post_category_id;
         $post->subCategories()->attach($sub_category_id);
 
@@ -172,7 +170,7 @@ class PostsController extends Controller
         $post_id = $request->post_id;
 
 
-        $like = new Like;
+        // $like = new Like;
         // すでにいいねが存在するか確認
         $existingLike = Like::where('like_user_id', $user_id)
             ->where('like_post_id', $post_id)

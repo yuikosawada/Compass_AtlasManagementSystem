@@ -53,6 +53,9 @@ Route::group(['middleware' => 'auth'], function () {
 
             Route::get('/bulletin_board/like', 'PostsController@likeBulletinBoard')->name('like.bulletin.board');
             Route::get('/bulletin_board/my_post', 'PostsController@myBulletinBoard')->name('my.bulletin.board');
+            //   投稿画面へ
+            Route::get('/bulletin_board/create', 'PostsController@postInput')->name('post.create');
+
             Route::post('/bulletin_board/create', 'PostsController@postCreate')->name('post.create');
             Route::post('/create/main_category', 'PostsController@mainCategoryCreate')->name('main.category.create');
             Route::post('/create/sub_category', 'PostsController@subCategoryCreate')->name('sub.category.create');
