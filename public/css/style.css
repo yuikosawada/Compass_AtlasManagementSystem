@@ -315,7 +315,6 @@ color: #fff;
     cursor: pointer;
 }
 .search_conditions_inner {
-    display: none;
     background: #fff;
 }
 .subject_edit_btn {

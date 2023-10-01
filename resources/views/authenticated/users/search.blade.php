@@ -95,9 +95,9 @@
             <label>選択科目</label>
             <!-- 選択科目追加 -->
             <div>
-              <p>国語<input type="checkbox" name="" id=""></p>
-              <p>数学<input type="checkbox" name="" id=""></p>
-              <p>英語<input type="checkbox" name="" id=""></p>
+              <p>国語<input type="checkbox" name="subject" value="1" id="1" form="userSearchRequest"></p>
+              <p>数学<input type="checkbox" name="subject" value="2" id="2" form="userSearchRequest"></p>
+              <p>英語<input type="checkbox" name="subject" value="3" id="3" form="userSearchRequest"></p>
             </div>
           </div>
         </div>

@@ -12,6 +12,7 @@ use App\Models\Posts\Like;
 use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
 use App\Http\Requests\BulletinBoard\PostCreateFormRequest;
+use App\Http\Requests\BulletinBoard\CategoryFormRequest;
 use App\Models\Users\Subjects;
 use Auth;
 
@@ -92,11 +93,9 @@ class PostsController extends Controller
         Post::findOrFail($id)->delete();
         return redirect()->route('post.show');
     }
-    public function mainCategoryCreate(PostFormRequest $request)
+    public function mainCategoryCreate(CategoryFormRequest $request)
     {
-        // MainCategory::create(['main_category' => $request->main_category_name]);
-        // return redirect()->route('post.input');
-
+        
         try {
             MainCategory::create(['main_category' => $request->main_category_name]);
             return redirect()->route('post.input');
@@ -105,9 +104,9 @@ class PostsController extends Controller
         }
     }
     //サブカテゴリ作成
-    public function subCategoryCreate(Request $request)
+    public function subCategoryCreate(CategoryFormRequest $request)
     {
-        // PostFormRequestでバリデーションに引っかかったものの表示までしてくれているので、RegisterControllerには登録処理のみでOK
+        // CategoryFormRequestでバリデーションに引っかかったものの表示までしてくれているので、RegisterControllerには登録処理のみでOK
 
         $main_category = $request->main_category_id;
         SubCategory::create(
@@ -149,21 +148,7 @@ class PostsController extends Controller
         return view('authenticated.bulletinboard.post_like', compact('posts', 'like'));
     }
 
-    // public function postLike(Request $request)
-    // {
-    //     $user_id = Auth::id();
-    //     $post_id = $request->post_id;
-
-
-    //     $like = new Like;
-
-
-    //     $like->like_user_id = $user_id;
-    //     $like->like_post_id = $post_id;
-    //     $like->save();
-
-    //     return response()->json();
-    // }
+   
     public function postLike(Request $request)
     {
         $user_id = Auth::id();
