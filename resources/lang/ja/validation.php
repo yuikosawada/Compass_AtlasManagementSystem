@@ -154,6 +154,7 @@ return [
         'comment'=>'コメント',
         //カテゴリ用
         'main_category_name'=>'メインカテゴリー',
+        'main_category_id'=>'メインカテゴリー',
         'sub_category_name'=>'サブカテゴリー',
         // ユーザー登録用
         'over_name' => '苗字',

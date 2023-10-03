@@ -6,7 +6,7 @@
     <div class="">
       <p class="mb-0">カテゴリー</p>
       <select class="w-100" form="postCreate" name="post_category_id">
-      
+
         <!-- カテゴリー表示 -->
         @foreach($main_categories as $main_category)
         <optgroup label="{{ $main_category->main_category }}"></optgroup>
@@ -42,18 +42,20 @@
       <div class="">
         <!-- メインカテゴリー追加ー -->
         @if ($errors->has('main_category_name'))
-          <p class="error">{{ $errors->first('main_category_name') }} </p> @endif
+        <p class="error">{{ $errors->first('main_category_name') }} </p> @endif
         <p class="m-0">メインカテゴリー</p>
         <input type="text" class="w-100" name="main_category_name" form="MainCategoryRequest">
         <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="MainCategoryRequest">
       </div>
       <!-- サブカテゴリー追加 -->
       <div class="">
-      @if ($errors->has('sub_category_name'))
-          <p class="error">{{ $errors->first('sub_category_name') }} </p> @endif
+        @if ($errors->has('sub_category_name'))
+        <p class="error">{{ $errors->first('sub_category_name') }} </p> @endif
+        @if ($errors->has('main_category_id'))
+        <p class="error">{{ $errors->first('main_category_id') }} </p> @endif
         <p class="m-0">サブカテゴリー</p>
         <select class="" name="main_category_id" form="SubCategoryRequest">
-          <option value="none">-----</option>
+          <option value="">-----</option>
           @foreach ($main_categories as $main_category)
           <option value="{{ $main_category->id }}">{{ $main_category->main_category }}</option>
           @endforeach

@@ -110,11 +110,11 @@ class PostsController extends Controller
     {
         // SubCategoryRequestでバリデーションに引っかかったものの表示までしてくれているので、RegisterControllerには登録処理のみでOK
 
-        $main_category = $request->main_category_id;
+        // $main_category = $request->main_category_id;
         SubCategory::create(
             [
                 'sub_category' => $request->sub_category_name,
-                'main_category_id' => $main_category
+                'main_category_id' =>$request->main_category_id
             ]
 
         );
