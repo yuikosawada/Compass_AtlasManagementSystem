@@ -325,3 +325,9 @@ color: #fff;
 .subject_inner {
     display: none;
 }
+
+/* 予約カレンダー */
+.passed-day{
+    background-color: #eeeeed;
+
+}

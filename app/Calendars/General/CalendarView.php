@@ -41,7 +41,8 @@ class CalendarView{
         $toDay = $this->carbon->copy()->format("Y-m-d");
 
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-          $html[] = '<td class="calendar-td">';
+          // passed-dayを追加し過去の日付をグレーに
+          $html[] = '<td class="calendar-td passed-day">';
         }else{
           $html[] = '<td class="calendar-td '.$day->getClassName().'">';
         }

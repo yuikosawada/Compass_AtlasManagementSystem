@@ -150,6 +150,8 @@ return [
         // 投稿用
         'post_body'=>'投稿内容',
         'post_title'=>'タイトル',
+        // コメント用
+        'comment'=>'コメント',
         //カテゴリ用
         'main_category_name'=>'メインカテゴリー',
         'sub_category_name'=>'サブカテゴリー',

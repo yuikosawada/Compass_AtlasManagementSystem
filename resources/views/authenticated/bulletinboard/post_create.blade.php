@@ -40,31 +40,31 @@
   <div class="w-25 ml-auto mr-auto">
     <div class="category_area mt-5 p-5">
       <div class="">
-        <!-- エラー -->
+        <!-- メインカテゴリー追加ー -->
         @if ($errors->has('main_category_name'))
           <p class="error">{{ $errors->first('main_category_name') }} </p> @endif
         <p class="m-0">メインカテゴリー</p>
-        <input type="text" class="w-100" name="main_category_name" form="CategoryFormRequest">
-        <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="CategoryFormRequest">
+        <input type="text" class="w-100" name="main_category_name" form="MainCategoryRequest">
+        <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="MainCategoryRequest">
       </div>
       <!-- サブカテゴリー追加 -->
       <div class="">
       @if ($errors->has('sub_category_name'))
           <p class="error">{{ $errors->first('sub_category_name') }} </p> @endif
         <p class="m-0">サブカテゴリー</p>
-        <select class="" name="main_category_id" form="CategoryFormRequest">
+        <select class="" name="main_category_id" form="SubCategoryRequest">
           <option value="none">-----</option>
           @foreach ($main_categories as $main_category)
           <option value="{{ $main_category->id }}">{{ $main_category->main_category }}</option>
           @endforeach
         </select>
-        <input type="text" class="w-100" name="sub_category_name" form="CategoryFormRequest">
-        <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="CategoryFormRequest">
+        <input type="text" class="w-100" name="sub_category_name" form="SubCategoryRequest">
+        <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="SubCategoryRequest">
       </div>
       <!-- ここまで -->
-      <form action="{{ route('main.category.create') }}" method="post" id="CategoryFormRequest">{{ csrf_field() }}</form>
+      <form action="{{ route('main.category.create') }}" method="post" id="MainCategoryRequest">{{ csrf_field() }}</form>
       <!-- ここから追加 -->
-      <form action="{{ route('sub.category.create') }}" method="post" id="CategoryFormRequest">{{ csrf_field() }}</form>
+      <form action="{{ route('sub.category.create') }}" method="post" id="SubCategoryRequest">{{ csrf_field() }}</form>
       <!-- ここまで -->
     </div>
   </div>

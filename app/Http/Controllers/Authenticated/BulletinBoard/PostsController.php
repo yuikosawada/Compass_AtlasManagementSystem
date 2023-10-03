@@ -11,8 +11,10 @@ use App\Models\Posts\PostComment;
 use App\Models\Posts\Like;
 use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
+use App\Http\Requests\BulletinBoard\CommentFormRequest;
 use App\Http\Requests\BulletinBoard\PostCreateFormRequest;
-use App\Http\Requests\BulletinBoard\CategoryFormRequest;
+use App\Http\Requests\BulletinBoard\MainCategoryRequest;
+use App\Http\Requests\BulletinBoard\SubCategoryRequest;
 use App\Models\Users\Subjects;
 use Auth;
 
@@ -93,7 +95,7 @@ class PostsController extends Controller
         Post::findOrFail($id)->delete();
         return redirect()->route('post.show');
     }
-    public function mainCategoryCreate(CategoryFormRequest $request)
+    public function mainCategoryCreate(MainCategoryRequest $request)
     {
         
         try {
@@ -104,9 +106,9 @@ class PostsController extends Controller
         }
     }
     //サブカテゴリ作成
-    public function subCategoryCreate(CategoryFormRequest $request)
+    public function subCategoryCreate(SubCategoryRequest $request)
     {
-        // CategoryFormRequestでバリデーションに引っかかったものの表示までしてくれているので、RegisterControllerには登録処理のみでOK
+        // SubCategoryRequestでバリデーションに引っかかったものの表示までしてくれているので、RegisterControllerには登録処理のみでOK
 
         $main_category = $request->main_category_id;
         SubCategory::create(
@@ -120,7 +122,7 @@ class PostsController extends Controller
     }
     // ここまで
 
-    public function commentCreate(Request $request)
+    public function commentCreate(CommentFormRequest $request)
     {
         PostComment::create([
             'post_id' => $request->post_id,
