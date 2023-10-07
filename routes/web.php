@@ -11,12 +11,12 @@
 |
 */
 // タイムアウトしたらログインページに戻る
-// Route::get('/', function () {
-//     return view('auth.login.login');
-// })->name('login');
+Route::get('/login', 'Auth\LoginController@loginView')->name('login');
+
 
 Route::group(['middleware' => ['guest']], function () {
     Route::namespace('Auth')->group(function () {
+        
         Route::get('/register', 'RegisterController@registerView')->name('registerView');
         Route::post('/register/post', 'RegisterController@registerPost')->name('registerPost');
         Route::get('/login', 'LoginController@loginView')->name('loginView');
@@ -27,6 +27,7 @@ Route::group(['middleware' => ['guest']], function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::namespace('Authenticated')->group(function () {
+        
         Route::namespace('Top')->group(function () {
             Route::get('/logout', 'TopsController@logout');
             Route::get('/top', 'TopsController@show')->name('top.show');
@@ -45,6 +46,8 @@ Route::group(['middleware' => 'auth'], function () {
             });
         });
         Route::namespace('BulletinBoard')->group(function () {
+
+
             Route::get('/bulletin_board/posts/{keyword?}', 'PostsController@show')->name('post.show');
             Route::get('/bulletin_board/posts', 'PostsController@show')->name('post.show');
             // コメントカウント

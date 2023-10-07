@@ -19,6 +19,7 @@ class CreatePostCommentsTable extends Migration
             $table->integer('user_id')->comment('投稿した人のid');
             $table->string('comment')->comment('コメント');
             $table->timestamp('created_at')->nullable()->comment('登録日時');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
     }
 

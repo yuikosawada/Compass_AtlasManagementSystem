@@ -26,8 +26,6 @@ class PostsController extends Controller
         $categories = MainCategory::get();
         $like = new Like;
         $post_comment = new Post;
-        // $post_sub_category = PostSubCategory::get('id');
-        // $sub_category =  new SubCategory;
 
         $subjects = Subjects::with('users')->get();
 
@@ -51,6 +49,17 @@ class PostsController extends Controller
                 $query->where('sub_category', $request->sub_categories);
             })->get();
         }
+        // else if (!empty($request->keyword)) {
+        //     // タイトルのあいまい検索
+        //     $posts = Post::with('user', 'postComments')
+        //         ->where('post_title', 'like', '%' . $request->keyword . '%')->get();
+        // } 
+        // else if (!empty($request->keyword)) {
+        //     // 投稿内容のあいまい検索
+        //     $posts = Post::with('user', 'postComments')
+        //         ->where('post', 'like', '%' . $request->keyword . '%')->get();
+        // }
+
         return view('authenticated.bulletinboard.posts', compact('posts', 'categories', 'like', 'post_comment', 'subjects'));
     }
 
@@ -107,7 +116,7 @@ class PostsController extends Controller
     {
         // SubCategoryRequestでバリデーションに引っかかったものの表示までしてくれているので、RegisterControllerには登録処理のみでOK
 
-        // $main_category = $request->main_category_id;
+
         SubCategory::create(
             [
                 'sub_category' => $request->sub_category_name,
@@ -130,24 +139,10 @@ class PostsController extends Controller
         return redirect()->route('post.detail', ['id' => $request->post_id]);
     }
     //投稿を削除
-    // public function postDelete($id)
-    // {
-    //      Post::findOrFail($id)->delete();
-    //     return redirect()->route('post.show');
-    // }
     public function postDelete($id)
     {
-        $post = Post::find($id); // 対象の投稿を取得
-        if ($post) {
-            // dd($post->postComments->id);
-            $post->postComments->deleteCommentByPost($id);
-            $post->posts->deletepost($id);
-        }
+        Post::findOrFail($id)->delete();
         return redirect()->route('post.show');
-
-    //     // $this->postComments->deleteCommentByPost($id);
-    //     // $this->posts->deletepost($id);
-    //     // return redirect()->route('post.show');
     }
     // ここまで編集中
 
