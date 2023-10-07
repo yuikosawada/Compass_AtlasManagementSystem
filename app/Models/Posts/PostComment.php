@@ -16,6 +16,12 @@ class PostComment extends Model
         'user_id',
         'comment',
     ];
+//   投稿に紐づいているコメントを同時に削除する
+    public function deleteCommentByPost($id)
+ {
+    PostComment::where('post_id', '=', $id)->delete();
+    // $this->where('post_id', '=', $id)->delete();
+ }
 
     public function post(){
         return $this->belongsTo('App\Models\Posts\Post');

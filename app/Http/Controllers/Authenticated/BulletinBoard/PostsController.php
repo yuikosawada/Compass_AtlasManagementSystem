@@ -90,14 +90,11 @@ class PostsController extends Controller
         return redirect()->route('post.detail', ['id' => $request->post_id]);
     }
 
-    public function postDelete($id)
-    {
-        Post::findOrFail($id)->delete();
-        return redirect()->route('post.show');
-    }
+
+
     public function mainCategoryCreate(MainCategoryRequest $request)
     {
-        
+
         try {
             MainCategory::create(['main_category' => $request->main_category_name]);
             return redirect()->route('post.input');
@@ -114,7 +111,7 @@ class PostsController extends Controller
         SubCategory::create(
             [
                 'sub_category' => $request->sub_category_name,
-                'main_category_id' =>$request->main_category_id
+                'main_category_id' => $request->main_category_id
             ]
 
         );
@@ -132,6 +129,28 @@ class PostsController extends Controller
 
         return redirect()->route('post.detail', ['id' => $request->post_id]);
     }
+    //投稿を削除
+    // public function postDelete($id)
+    // {
+    //      Post::findOrFail($id)->delete();
+    //     return redirect()->route('post.show');
+    // }
+    public function postDelete($id)
+    {
+        $post = Post::find($id); // 対象の投稿を取得
+        if ($post) {
+            // dd($post->postComments->id);
+            $post->postComments->deleteCommentByPost($id);
+            $post->posts->deletepost($id);
+        }
+        return redirect()->route('post.show');
+
+    //     // $this->postComments->deleteCommentByPost($id);
+    //     // $this->posts->deletepost($id);
+    //     // return redirect()->route('post.show');
+    }
+    // ここまで編集中
+
 
 
 
@@ -150,7 +169,7 @@ class PostsController extends Controller
         return view('authenticated.bulletinboard.post_like', compact('posts', 'like'));
     }
 
-   
+
     public function postLike(Request $request)
     {
         $user_id = Auth::id();

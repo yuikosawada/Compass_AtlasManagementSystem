@@ -13,19 +13,19 @@ li {
     list-style: none;
 }
 
-input{
+input {
     cursor: pointer;
 }
 
-.b-radius-10{
+.b-radius-10 {
     border-radius: 10px;
 }
 
-.error{
+.error {
     color: #f33a3a;
     font-size: 12px;
 }
-.mb-20{
+.mb-20 {
     margin-bottom: 20px;
 }
 /* サイドバー */
@@ -35,7 +35,6 @@ input{
     background-color: #03aad2;
     font-weight: bold;
     padding: 20px 5px;
-
 }
 .main-container {
     width: 100%;
@@ -43,11 +42,10 @@ input{
 .sidebar p a {
     color: #fff;
 }
-.sidebar p .sidebar_icon{
-width: 20px;
-color: #fff;
+.sidebar p .sidebar_icon {
+    width: 20px;
+    color: #fff;
 }
-
 
 /* ログイン */
 .box-shadow {
@@ -143,7 +141,7 @@ color: #fff;
     border-radius: 10px;
 }
 .post_bottom_area {
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 .like_btn,
 .un_like_btn {
@@ -158,36 +156,34 @@ color: #fff;
     color: red;
 }
 /* 掲示板 投稿一覧 */
-.posts_top_btn{
+.posts_top_btn {
     background-color: #03aad2;
     border-radius: 8px;
     text-align: center;
 }
-.posts_top_btn a{
+.posts_top_btn a {
     color: #fff;
 }
 
-.keyword_box{
+.keyword_box {
     display: flex;
 }
 
-.keyword_box input[type=text]{
+.keyword_box input[type="text"] {
     background-color: transparent;
     border: 1px solid #cccccc;
-    border-radius: 8PX 0 0 8px;
+    border-radius: 8px 0 0 8px;
     padding: 3px 11px;
     width: 83%;
-
 }
 
-.keyword_box input[type=submit]{
+.keyword_box input[type="submit"] {
     background-color: #03aad2;
     border-radius: 0 8px 8px 0;
     text-align: center;
     color: #fff;
     border: none;
     padding: 3px 11px;
-
 }
 
 /* 掲示板 詳細画面 */
@@ -257,13 +253,14 @@ color: #fff;
     background: #999;
     color: #fff;
 }
-.main_sub_categories *{
+.main_categories,
+.sub_categories {
     padding-top: 15px;
 }
-.main_sub_categories li{
+.main_sub_categories li {
     border-bottom: 1px solid #ccc;
 }
-.main_sub_categories input{
+.main_sub_categories input {
     background: transparent;
     color: #000;
     border-bottom: 1px solid #ccc;
@@ -273,24 +270,44 @@ color: #fff;
     text-align: left;
 }
 
+.main_categories * {
+    display: flex;
+    justify-content: space-between;
+}
 
-.main_categories span,
-.sub_categories li input {
+.main_categories span {
     list-style: none;
     cursor: pointer;
 }
 .category_btn_pink,
-.category_btn_yellow{
+.category_btn_yellow {
     padding: 7px 0;
     width: 49%;
     min-width: 100px;
 }
-.category_btn_pink{
+.category_btn_pink {
     background-color: #e38eab;
 }
-.category_btn_yellow{
+.category_btn_yellow {
     background-color: #ebbc5d;
-    }
+}
+
+/* 開く機能 */
+.sub_categories {
+    display: none;
+}
+.checkbox {
+    display: none;
+}
+.open {
+    display: none;
+}
+.checkbox:checked + .open {
+    display: block;
+}
+.checkbox:checked + .close {
+    display: none;
+}
 
 /* ユーザー検索 */
 .reserve_users_area {
@@ -327,7 +344,6 @@ color: #fff;
 }
 
 /* 予約カレンダー */
-.passed-day{
+.passed-day {
     background-color: #eeeeed;
-
 }

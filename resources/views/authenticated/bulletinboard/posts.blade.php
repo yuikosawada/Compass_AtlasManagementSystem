@@ -56,12 +56,13 @@
         @endforeach -->
         @foreach($categories as $category)
         <li class="main_categories" category_id="{{ $category->id }}">
-          <span>{{ $category->main_category }}<span>
-              <i class="fa-solid fa-chevron-down" style="color: #404040;"></i>
-              <i class="fa-solid fa-chevron-up" style="color: #404040;"></i>
+          <label for="mondai_sanple3" class="sotomi">{{ $category->main_category }}<label>
+              <input type="checkbox" id="mondai_sanple3" class="checkbox">
+              <i class="fa-solid fa-chevron-down close" style="color: #404040;"></i>
+              <i class="fa-solid fa-chevron-up open" style="color: #404040;"></i>
         </li>
         @foreach($category->subCategories as $sub_category)
-        <input type="submit" name="sub_categories" class="category_btn" value=" {{ $sub_category->sub_category }}" form="postSearchRequest" category_id="{{ $sub_category->id }}">
+        <input type="submit" name="sub_categories" class="category_btn sub_categories" value=" {{ $sub_category->sub_category }}" form="postSearchRequest" category_id="{{ $sub_category->id }}">
         </input>
         @endforeach
         @endforeach

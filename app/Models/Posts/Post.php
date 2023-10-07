@@ -3,6 +3,7 @@
 namespace App\Models\Posts;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Posts\PostComment;
 
 class Post extends Model
 {
@@ -26,15 +27,19 @@ class Post extends Model
     {
         return $this->hasMany('App\Models\Posts\PostComment');
     }
+   
 
     // 投稿が削除されたらコメントも同時に削除（まだ機能してない）
-    public static function boot()
-    {
-        parent::boot();
-        static::deleted(function ($post) {
-            $post->postComments()->delete();
-        });
-    }
+    // public static function boot()
+    // {
+    //     parent::boot();
+    //     static::deleted(function ($post) {
+    //         $post->postComments()->delete();
+    //     });
+    // }
+
+   
+    
 
     public function Likes()
     {
