@@ -59,20 +59,17 @@ class CalendarWeekDay
     $html = [];
       $html[] = '<select name="getPart[]" class="border-primary" style="width:70px; border-radius:5px;" form="reserveParts">';
     $html[] = '<option value="" selected></option>';
-    //  0を"1"に変更
-    if ($one_part_frame == "1") {
+    if ($one_part_frame == "0") {
       $html[] = '<option value="1" disabled>リモ1部(残り0枠)</option>';
     } else {
       $html[] = '<option value="1">リモ1部(残り' . $one_part_frame . '枠)</option>';
     }
-    //  0を"2"に変更
-    if ($two_part_frame == "2") {
+    if ($two_part_frame == "0") {
       $html[] = '<option value="2" disabled>リモ2部(残り0枠)</option>';
     } else {
       $html[] = '<option value="2">リモ2部(残り' . $two_part_frame . '枠)</option>';
     }
-    //  0を"3"に変更
-    if ($three_part_frame == "3") {
+    if ($three_part_frame == "0") {
       $html[] = '<option value="3" disabled>リモ3部(残り0枠)</option>';
     } else {
       $html[] = '<option value="3">リモ3部(残り' . $three_part_frame . '枠)</option>';

@@ -62,8 +62,11 @@ class CalendarView
           // } else if ($reservePart == 3) {
           //   $reservePart = "3部参加";
           // } else {
-            // 受付終了
-            $html[] = '<p class="border-primary" style="width:70px; border-radius:5px;">受付終了</p>';
+          // 受付終了
+          $html[] = '
+            <select name="getPart[]" class="select_pastday" style="width:70px; border-radius:5px;" form="reserveParts" disabled>
+            <option value="" class="border-primary" style="width:70px; border-radius:5px;">受付終了</option>
+            ';
           // }
         }
 
@@ -77,6 +80,7 @@ class CalendarView
           } else if ($reservePart == 3) {
             $reservePart = "リモ3部";
           }
+          
           if ($startDay <= $day->everyDay() && $toDay >= $day->everyDay()) {
             $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px"></p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
@@ -97,7 +101,6 @@ class CalendarView
     $html[] = '</div>';
     $html[] = '<form action="/reserve/calendar" method="post" id="reserveParts">' . csrf_field() . '</form>';
     $html[] = '<form action="/delete/calendar" method="post" id="deleteParts">' . csrf_field() . '</form>';
-
     return implode('', $html);
   }
 

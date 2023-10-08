@@ -82,7 +82,7 @@ input {
     min-width: 100px;
 }
 .day_part {
-    color: #494949;
+    display: block;
     font-size: 12px;
 }
 .adjust-table {
@@ -346,4 +346,10 @@ input {
 /* 予約カレンダー */
 .passed-day {
     background-color: #eeeeed;
+}
+.select_pastday{
+    background: none;
+    border: none;
+    appearance: none;
+    color: #000;
 }
