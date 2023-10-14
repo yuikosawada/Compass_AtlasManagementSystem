@@ -12,21 +12,12 @@ class Authenticate extends Middleware
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
-    // protected function redirectTo($request)
-    // {
-    //     if (! $request->expectsJson()) {
-    //         return route('login');
-    //     }
-    // }
     protected function redirectTo($request)
     {
-        if (!$request->expectsJson()) {
-
-            if (\Route::is('*')) {
-                return route('login');
-            }
-        } else {
-            return route('login');
+         // ログインにリダイレクト設定追記
+        if (! $request->expectsJson()) {
+            return route('loginView');
         }
     }
+
 }

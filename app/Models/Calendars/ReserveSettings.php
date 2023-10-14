@@ -3,7 +3,7 @@
 namespace App\Models\Calendars;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Users\User;
 class ReserveSettings extends Model
 {
     const UPDATED_AT = null;
