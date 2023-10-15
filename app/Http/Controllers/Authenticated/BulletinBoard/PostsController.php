@@ -48,6 +48,11 @@ class PostsController extends Controller
             $posts = Post::whereHas('subCategories', function ($query) use ($request) {
                 $query->where('sub_category', $request->sub_categories);
             })->get();
+        } else if ($request->keyword) {
+            // 検索欄でサブカテゴリ完全一致検索
+            $posts = Post::whereHas('subCategories', function ($query) use ($request) {
+                $query->where('sub_category', $request->keyword);
+            })->get();
         }
         // else if (!empty($request->keyword)) {
         //     // タイトルのあいまい検索
