@@ -12,11 +12,16 @@
           <th class="w-25">場所</th>
         </tr>
         @foreach($reservePersons as $reservePerson)
+        @foreach($reservePerson->users as $user)
         <tr class="text-center">
-          <td class="w-25">{{$reservePerson->users->user_id}}</td>
-          <td class="w-25">{{$reservePerson}}</td>
+          <td class="w-25">{{$user->id}}</td>
+          <td class="w-25">{{$user->over_name}}</td>
           <td class="w-25">リモート</td>
+          <!-- <td class="w-25">{{$reservePerson->id}}</td>
+          <td class="w-25">{{$reservePerson->users}}</td>
+          <td class="w-25">リモート</td> -->
         </tr>
+        @endforeach
         @endforeach
       </table>
     </div>

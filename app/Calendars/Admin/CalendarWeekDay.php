@@ -28,20 +28,16 @@ class CalendarWeekDay{
     $one_part = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '1')->first();
     $two_part = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '2')->first();
     $three_part = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '3')->first();
-
-    $one_part_count = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '2')->get()->count();
-    $two_part_count = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '2')->get()->count();
-    $three_part_count = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '3')->get()->count();
-
+    
     $html[] = '<div class="text-left">';
     if($one_part){
-      $html[] = '<a href="'. route('calendar.admin.detail', ['date' => $ymd, 'part' => '1']) . '" class="day_part m-0 pt-1">1部</a><p>'.$one_part_count.'</p>';
+      $html[] = '<a href="'. route('calendar.admin.detail', ['date' => $ymd, 'part' => '1']) . '" class="day_part m-0 pt-1">1部</a><p>'.count($one_part->users).'</p>';
     }
     if($two_part){
-      $html[] = '<a href="'. route('calendar.admin.detail', ['date' => $ymd, 'part' => '2']) . '" class="day_part m-0 pt-1">2部</a><p>'.$two_part_count.'</p>';
+      $html[] = '<a href="'. route('calendar.admin.detail', ['date' => $ymd, 'part' => '2']) . '" class="day_part m-0 pt-1">2部</a><p>'.count($two_part->users).'</p>';
     }
     if($three_part){
-      $html[] = '<a href="'. route('calendar.admin.detail', ['date' => $ymd, 'part' => '3']) . '" class="day_part m-0 pt-1">3部</a><p>'.$three_part_count.'</p>';
+      $html[] = '<a href="'. route('calendar.admin.detail', ['date' => $ymd, 'part' => '3']) . '" class="day_part m-0 pt-1">3部</a><p>'.count($three_part->users).'</p>';
     }
     $html[] = '</div>';
 

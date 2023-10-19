@@ -53,25 +53,35 @@ class CalendarView
         }
         $html[] = $day->render();
         // 過去の日付に参加日を表示
+        //もし、過去の日付であれば以下を実行する
         if ($startDay <= $day->everyDay() && $toDay >= $day->everyDay()) {
-          // $reservePart = $day->authReserveDate($toDay >= $day->everyDay())->first()->setting_part;
-          // if ($reservePart == 1) {
-          //   $reservePart = "1部参加";
-          // } else if ($reservePart == 2) {
-          //   $reservePart = "2部参加";
-          // } else if ($reservePart == 3) {
-          //   $reservePart = "3部参加";
-          // } else {
-          // 受付終了
+        //  自分が予約した日のsetting_partカラムの値を取得したい
+          $reservePart = $day->authReserveDate($toDay >= $day->everyDay())->first()->setting_part;
+
+          // 以下試しに書いてみた（リレーション先をwhereする）
+          // $authReservePart = ReserveSettings::whereHas('users',funciton($query){
+          //   $query->where('user_id',Auth::id())})->reserve_setting_id->get();
+          // $reservePart =  ReserveSettings::with('users')->where('setting_part',$authReservePart)->setting_part;
+
+
+          // dd($reservePart);
+          if ($reservePart == 1) {
+            $reservePart = "1部参加";
+          } else if ($reservePart == 2) {
+            $reservePart = "2部参加";
+          } else if ($reservePart == 3) {
+            $reservePart = "3部参加";
+          } else {
           $html[] = '
             <select name="getPart[]" class="select_pastday" style="width:70px; border-radius:5px;" form="reserveParts" disabled>
             <option value="" class="border-primary" style="width:70px; border-radius:5px;">受付終了</option>
             ';
-          // }
-        }
+          }
+        };
 
         // 今日以降で予約している日に予約部を表示する（はじめから記述されていた(頭にelse追加した)）
-        else if (in_array($day->everyDay(), $day->authReserveDay())) {
+        // else if (in_array($day->everyDay(), $day->authReserveDay())) {
+        if (in_array($day->everyDay(), $day->authReserveDay())) {
           $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
           if ($reservePart == 1) {
             $reservePart = "リモ1部";
@@ -80,7 +90,7 @@ class CalendarView
           } else if ($reservePart == 3) {
             $reservePart = "リモ3部";
           }
-          
+
           if ($startDay <= $day->everyDay() && $toDay >= $day->everyDay()) {
             $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px"></p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';

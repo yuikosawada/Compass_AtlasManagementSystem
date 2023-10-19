@@ -23,8 +23,8 @@ class CalendarsController extends Controller
         try{
             $getPart = $request->getPart;
             $getDate = $request->getData;
-            dd($getDate);
             // エラー $getDateと$getPartに入ってるものの数が合わない（$getPartに過ぎた日にちがふくまれてない）
+            dd($getDate);
             $reserveDays = array_filter(array_combine($getDate, $getPart));
             
             foreach($reserveDays as $key => $value){

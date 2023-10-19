@@ -33,6 +33,11 @@ class PostsController extends Controller
             $posts = Post::with('user', 'postComments')
                 ->where('post_title', 'like', '%' . $request->keyword . '%')
                 ->orWhere('post', 'like', '%' . $request->keyword . '%')->get();
+
+                // 検索欄でサブカテゴリ完全一致検索
+            $posts = Post::whereHas('subCategories', function ($query) use ($request) {
+                $query->where('sub_category', $request->keyword);
+            })->get();
         } else if ($request->category_word) {
             $sub_category = $request->category_word;
             $posts = Post::with('user', 'postComments')->get();
@@ -48,12 +53,7 @@ class PostsController extends Controller
             $posts = Post::whereHas('subCategories', function ($query) use ($request) {
                 $query->where('sub_category', $request->sub_categories);
             })->get();
-        } else if ($request->keyword) {
-            // 検索欄でサブカテゴリ完全一致検索
-            $posts = Post::whereHas('subCategories', function ($query) use ($request) {
-                $query->where('sub_category', $request->keyword);
-            })->get();
-        }
+        } 
         // else if (!empty($request->keyword)) {
         //     // タイトルのあいまい検索
         //     $posts = Post::with('user', 'postComments')
