@@ -21,10 +21,10 @@ class CalendarsController extends Controller
     public function reserve(Request $request){
         DB::beginTransaction();
         try{
+            // dd($request);
             $getPart = $request->getPart;
             $getDate = $request->getData;
             // エラー $getDateと$getPartに入ってるものの数が合わない（$getPartに過ぎた日にちがふくまれてない）
-            dd($getDate);
             $reserveDays = array_filter(array_combine($getDate, $getPart));
             
             foreach($reserveDays as $key => $value){

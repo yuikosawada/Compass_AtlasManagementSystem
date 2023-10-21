@@ -17,9 +17,6 @@
           <td class="w-25">{{$user->id}}</td>
           <td class="w-25">{{$user->over_name.$user->under_name}}</td>
           <td class="w-25">リモート</td>
-          <!-- <td class="w-25">{{$reservePerson->id}}</td>
-          <td class="w-25">{{$reservePerson->users}}</td>
-          <td class="w-25">リモート</td> -->
         </tr>
         @endforeach
         @endforeach
