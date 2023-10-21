@@ -83,6 +83,8 @@ input {
 }
 .day_part {
     display: block;
+    float: left;
+    padding-right: 30px;
     font-size: 12px;
 }
 .adjust-table {

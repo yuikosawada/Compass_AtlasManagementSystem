@@ -53,18 +53,9 @@ class CalendarView
         }
         $html[] = $day->render();
         // 過去の日付に参加日を表示
-        //もし、過去の日付であれば以下を実行する
         if ($startDay <= $day->everyDay() && $toDay >= $day->everyDay()) {
-        //  自分が予約した日のsetting_partカラムの値を取得したい
+          
           $reservePart = $day->authReserveDate($toDay >= $day->everyDay())->first()->setting_part;
-
-          // 以下試しに書いてみた（リレーション先をwhereする）
-          // $authReservePart = ReserveSettings::whereHas('users',funciton($query){
-          //   $query->where('user_id',Auth::id())})->reserve_setting_id->get();
-          // $reservePart =  ReserveSettings::with('users')->where('setting_part',$authReservePart)->setting_part;
-
-
-          // dd($reservePart);
           if ($reservePart == 1) {
             $reservePart = "1部参加";
           } else if ($reservePart == 2) {

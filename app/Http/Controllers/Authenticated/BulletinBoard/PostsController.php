@@ -54,16 +54,6 @@ class PostsController extends Controller
                 $query->where('sub_category', $request->sub_categories);
             })->get();
         } 
-        // else if (!empty($request->keyword)) {
-        //     // タイトルのあいまい検索
-        //     $posts = Post::with('user', 'postComments')
-        //         ->where('post_title', 'like', '%' . $request->keyword . '%')->get();
-        // } 
-        // else if (!empty($request->keyword)) {
-        //     // 投稿内容のあいまい検索
-        //     $posts = Post::with('user', 'postComments')
-        //         ->where('post', 'like', '%' . $request->keyword . '%')->get();
-        // }
 
         return view('authenticated.bulletinboard.posts', compact('posts', 'categories', 'like', 'post_comment', 'subjects'));
     }
