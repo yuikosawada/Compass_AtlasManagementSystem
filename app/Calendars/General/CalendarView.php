@@ -53,23 +53,21 @@ class CalendarView
         }
         $html[] = $day->render();
         // 過去の日付に参加日を表示
-        if ($startDay <= $day->everyDay() && $toDay >= $day->everyDay()) {
-        // 下記のもともとの文を上記に修正
-        // if (in_array($day->everyDay(), $day->authReserveDay())) {
-          $reservePart = $day->authReserveDate($toDay >= $day->everyDay())->first()->setting_part;
-          // dd($reservePart);
-
+        if (in_array($day->everyDay(), $day->authReserveDay())) {
+          $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
+          // 下記のもともとの文を上記に修正
+          // if (in_array($day->everyDay(), $day->authReserveDay())) {
           if ($reservePart == 1) {
             $reservePart = "1部参加";
           } else if ($reservePart == 2) {
             $reservePart = "2部参加";
           } else if ($reservePart == 3) {
             $reservePart = "3部参加";
-          } else {
-            $html[] = '
-            <select name="getPart[]" class="select_pastday" style="width:70px; border-radius:5px;" form="reserveParts" disabled>
-            <option value="" class="border-primary" style="width:70px; border-radius:5px;">受付終了</option>
-            ';
+          };
+
+          if ($startDay <= $day->everyDay() && $toDay >= $day->everyDay()) {
+            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">' . $reservePart . '</p>';
+            $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }
         };
 
@@ -92,11 +90,12 @@ class CalendarView
             $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="' . $day->authReserveDate($day->everyDay())->first()->setting_reserve . '">' . $reservePart . '</button>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }
+        } else if ($startDay <= $day->everyDay() && $toDay >= $day->everyDay()) {
+          $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">受付終了</p>';
         } else {
           $html[] = $day->selectPart($day->everyDay());
         }
-        // 下記では㉛日取得されていたので、今日以降を取得するようにしたい
-        $html[] = $day->getDate();
+       $html[] = $day->getDate();
         $html[] = '</td>';
       }
       $html[] = '</tr>';

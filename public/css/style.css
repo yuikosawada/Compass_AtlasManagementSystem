@@ -75,6 +75,9 @@ input {
 .day-sun {
     color: #ff0000;
 }
+.day-black{
+    color: #000;
+}
 .past-day {
     background: #eee;
 }
