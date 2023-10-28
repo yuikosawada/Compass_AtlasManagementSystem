@@ -4,7 +4,7 @@
 <div class="vh-100 border">
   <div class="top_area w-75 m-auto pt-5">
     <span>{{ $user->over_name }}</span><span>{{ $user->under_name }}さんのプロフィール</span>
-    <div class="user_status p-3">
+    <div class="user_status p-3 box-shadow">
       <p>名前 : <span>{{ $user->over_name }}</span><span class="ml-1">{{ $user->under_name }}</span></p>
       <p>カナ : <span>{{ $user->over_name_kana }}</span><span class="ml-1">{{ $user->under_name_kana }}</span></p>
       <p>性別 : @if($user->sex == 1)<span>男</span>@else<span>女</span>@endif</p>
@@ -18,9 +18,9 @@
         @can('admin')
         <span class="subject_edit_btn">選択科目の編集</span>
         <div class="subject_inner">
-          <form action="{{ route('user.edit') }}" method="post">
+          <form action="{{ route('user.edit') }}" method="post" class="d-f">
             @foreach($subject_lists as $subject_list)
-            <div>
+            <div class="subject_edit_subjects">
               <label>{{ $subject_list->subject }}</label>
               <input type="checkbox" name="subjects[]" value="{{ $subject_list->id }}">
             </div>

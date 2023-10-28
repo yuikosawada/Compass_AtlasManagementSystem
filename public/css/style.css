@@ -28,6 +28,23 @@ input {
 .mb-20 {
     margin-bottom: 20px;
 }
+.box-shadow {
+    box-shadow: 1px 1px 10px 0px #00000040;
+}
+.d-f{
+    display: flex;
+}
+.f-d-column {
+    display: flex;
+    flex-direction: column;
+}
+.ta-c {
+    text-align: center;
+}
+.box-shadow {
+    /* background-color: #fff; */
+    box-shadow: #bbb 0px 4px 10px;
+}
 /* サイドバー */
 .sidebar {
     width: 200px;
@@ -48,10 +65,7 @@ input {
 }
 
 /* ログイン */
-.box-shadow {
-    background-color: #fff;
-    box-shadow: #bbb 0px 0px 10px;
-}
+
 .login-logo {
     width: 160px;
     position: absolute;
@@ -75,7 +89,7 @@ input {
 .day-sun {
     color: #ff0000;
 }
-.day-black{
+.day-black {
     color: #000;
 }
 .past-day {
@@ -321,9 +335,10 @@ input {
     width: 800px;
     margin: 10px auto;
     height: 80vh;
-    overflow: scroll;
+    /* overflow: scroll; */
     padding: 10px;
-    background: #fff;
+    justify-content: space-between;
+    /* background: #fff; */
     border-radius: 5px;
 }
 .reserve_users_area span {
@@ -332,29 +347,77 @@ input {
 .one_person {
     width: 250px;
     height: 250px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 1em;
+}
+.search_area_inner {
+width: 300px;
+}
+.search_area_inner *{
+margin-top: 10px;
+}
+.search_area_label{
+    color: #495980;
+    /* font-size: 25px; */
 }
 .search_conditions span {
     cursor: pointer;
 }
 .search_conditions_inner {
-    background: #fff;
+    /* background: #fff; */
+}
+.search_gray_box {
+    background-color: #e0e5e9;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5em;
+}
+.reset_btn {
+    background-color: transparent;
+    border: none;
+    color: #03aad2;
+}
+.search_btn {
+    background-color: #03aad2;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
 }
 .subject_edit_btn {
-    font-size: 12px;
-    color: #0000ff;
+    color: #05aad2;
     cursor: pointer;
 }
 .subject_inner {
     display: none;
+}
+.subject_edit_subjects{
+    margin-right: 10px;
 }
 
 /* 予約カレンダー */
 .passed-day {
     background-color: #eeeeed;
 }
-.select_pastday{
+.select_pastday {
     background: none;
     border: none;
     appearance: none;
     color: #000;
+}
+
+/* 予約詳細 */
+.reserve-table {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 8px;
+}
+.reserve-table-header {
+    color: #fff;
+    background-color: #03aad2;
+}
+.reserve-table tr:nth-child(odd) td {
+    background-color: #e5f6fa;
 }

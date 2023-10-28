@@ -40,6 +40,8 @@ class CalendarView
     foreach ($weeks as $week) {
       $html[] = '<tr class="' . $week->getClassName() . '">';
 
+    
+
       $days = $week->getDays();
       foreach ($days as $day) {
         $startDay = $this->carbon->copy()->format("Y-m-01");
@@ -87,7 +89,7 @@ class CalendarView
             $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px"></p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           } else {
-            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="' . $day->authReserveDate($day->everyDay())->first()->setting_reserve . '">' . $reservePart . '</button>';
+            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75 cancel-modal-open" name="delete_date" reserve_part = "'.$reservePart.'" reserve_date ="'.$day->authReserveDate($day->everyDay())->first()->setting_reserve.'" style="font-size:12px" value="' . $day->authReserveDate($day->everyDay())->first()->setting_reserve . '">' . $reservePart . '</button>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }
         } else if ($startDay <= $day->everyDay() && $toDay >= $day->everyDay()) {
@@ -95,7 +97,7 @@ class CalendarView
         } else {
           $html[] = $day->selectPart($day->everyDay());
         }
-       $html[] = $day->getDate();
+        $html[] = $day->getDate();
         $html[] = '</td>';
       }
       $html[] = '</tr>';
