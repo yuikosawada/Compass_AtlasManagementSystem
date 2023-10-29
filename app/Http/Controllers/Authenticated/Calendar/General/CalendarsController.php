@@ -42,6 +42,12 @@ class CalendarsController extends Controller
     // 予約削除
     public function delete($id)
     {
+       
+
+        dd($id);
+
+        // ReserveSettingsのidとReserveSettingUersのreserve_settiing_idが一致し、かつ、ReserveSettingUersのuser_idとログイン中のユーザーのidが一致するレコードを削除
+
         ReserveSettings::with('reserve_setting_users')->findOrFail($id)->delete();
         return redirect()->route('calendar.general.show');
     }

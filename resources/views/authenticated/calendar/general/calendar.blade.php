@@ -12,13 +12,14 @@
         <dd class="reserve_date"></dd>
         <dt>時間：</dt> 
         <dd class="reserve_part"></dd>
+        <p class="id"></p>
         <p class="">上記の予約をキャンセルしてもよろしいですか？</p>
         </div>
        
         <div class="w-50 m-auto edit-modal-btn d-flex">
           <a class="js-modal-close btn btn-primary d-inline-block" href="">閉じる</a>
-          <input type="hidden" class="edit-modal-hidden" name="post_id" value="">
-          <input type="submit" class="btn btn-danger d-block" value="キャンセル">
+          <input type="hidden" class="edit-modal-hidden" name="id" value="">
+          <input type="submit" class="btn btn-danger d-block" id="" value="キャンセル" >
         </div>
       </div>
       {{ csrf_field() }}

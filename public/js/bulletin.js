@@ -69,18 +69,20 @@ $(function () {
         $(".js-modal").fadeOut();
         return false;
     });
+  
     // 予約キャンセルモーダル
     $(".cancel-modal-open").on("click", function () {
         $(".js-modal").fadeIn();
         var reserve_part = $(this).attr("reserve_part");
         var reserve_date = $(this).attr("reserve_date");
-        // var post_id = $(this).attr('post_id');
+        var id = $(this).attr('id');
         // $(".modal-inner-title input").val(reserve_date);
         // $(".modal-inner-body textarea").text(reserve_part);
       $(".modal-inner .reserve_part").text("" + reserve_part + "");
       $(".modal-inner .reserve_date").text("" + reserve_date + "");
+      // $(".modal-inner .id").text("" + id + "");
       
-        // $('.edit-modal-hidden').val(post_id);
+        $('.edit-modal-hidden').val(id);
         return false;
     });
     $(".js-modal-close").on("click", function () {
