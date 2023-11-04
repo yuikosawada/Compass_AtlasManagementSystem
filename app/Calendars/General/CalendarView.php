@@ -56,25 +56,7 @@ class CalendarView
           $html[] = '<td class="calendar-td ' . $day->getClassName() . '">';
         }
         $html[] = $day->render();
-        // 過去の日付に参加日を表示
-        if (in_array($day->everyDay(), $day->authReserveDay())) {
-          $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
-    
-          // 下記のもともとの文を上記に修正
-          // if (in_array($day->everyDay(), $day->authReserveDay())) {
-          if ($reservePart == 1) {
-            $reservePart = "1部参加";
-          } else if ($reservePart == 2) {
-            $reservePart = "2部参加";
-          } else if ($reservePart == 3) {
-            $reservePart = "3部参加";
-          };
-
-          if ($startDay <= $day->everyDay() && $toDay >= $day->everyDay()) {
-            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">' . $reservePart . '</p>';
-            $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
-          }
-        };
+       
 
         // 今日以降で予約している日に予約部を表示する（はじめから記述されていた(頭にelse追加した)）
         // else if (in_array($day->everyDay(), $day->authReserveDay())) {
@@ -82,15 +64,19 @@ class CalendarView
           $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
           if ($reservePart == 1) {
             $reservePart = "リモ1部";
+            $reservePartPast = "1部参加";
           } else if ($reservePart == 2) {
             $reservePart = "リモ2部";
+            $reservePartPast = "2部参加";
           } else if ($reservePart == 3) {
             $reservePart = "リモ3部";
+            $reservePartPast = "3部参加";
           }
+
 
           // ここから過去
           if ($startDay <= $day->everyDay() && $toDay >= $day->everyDay()) {
-            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px"></p>';
+            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">'.$reservePartPast.'</p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           } else {
             // ここから未来
@@ -109,8 +95,10 @@ class CalendarView
           // 予約してない過去日の場合
         } else if ($startDay <= $day->everyDay() && $toDay >= $day->everyDay()) {
           $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">受付終了</p>';
+          $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
         } else {
           $html[] = $day->selectPart($day->everyDay());
+          
         }
         $html[] = $day->getDate();
         $html[] = '</td>';
