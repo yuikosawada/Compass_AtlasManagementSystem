@@ -26,7 +26,6 @@ class PostsController extends Controller
         $categories = MainCategory::get();
         $like = new Like;
         $post_comment = new Post;
-
         $subjects = Subjects::with('users')->get();
 
         if (!empty($request->keyword)) {
@@ -53,7 +52,9 @@ class PostsController extends Controller
             $posts = Post::whereHas('subCategories', function ($query) use ($request) {
                 $query->where('sub_category', $request->sub_categories);
             })->get();
-        } 
+        } else{
+            $posts = Post::with('user', 'postComments')->get();
+        }
 
         return view('authenticated.bulletinboard.posts', compact('posts', 'categories', 'like', 'post_comment', 'subjects'));
     }

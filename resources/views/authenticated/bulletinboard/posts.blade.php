@@ -45,15 +45,7 @@
         <input type="submit" name="my_posts" class="category_btn_yellow category_btn" value="自分の投稿" form="postSearchRequest">
       </div>
       <ul class="main_sub_categories">
-        <!-- <li>
-          <span>教科</span>
-          <i class="fa-solid fa-chevron-down" style="color: #404040;"></i>
-          <i class="fa-solid fa-chevron-up open" style="color: #404040;"></i>
-        </li>
-        @foreach($subjects as $subject)
-        <input type="submit" name="sub_categories" class="category_btn" value="{{ $subject->subject }}" form="postSearchRequest" subject_id="{{ $subject->id }}">
-        </input>
-        @endforeach -->
+     
         @foreach($categories as $category)
         <li class="main_categories" category_id="{{ $category->id }}">
           <label for="mondai_sanple3" class="sotomi">{{ $category->main_category }}<label>

@@ -1,7 +1,7 @@
 @extends('layouts.sidebar')
 
 @section('content')
-<p>ユーザー検索</p>
+<!-- <p>ユーザー検索</p> -->
 <div class="search_content w-100 border d-flex">
   <div class="reserve_users_area">
     @foreach($users as $user)
@@ -97,10 +97,10 @@
           <div class="selected_engineer">
             <label class="search_area_label">選択科目</label>
             <!-- 選択科目追加 -->
-            <div>
-              <p>国語<input type="checkbox" name="subject" value="1" id="1" form="userSearchRequest"></p>
-              <p>数学<input type="checkbox" name="subject" value="2" id="2" form="userSearchRequest"></p>
-              <p>英語<input type="checkbox" name="subject" value="3" id="3" form="userSearchRequest"></p>
+            <div class="d-f">
+              <p>国語<input type="checkbox" class="mr-20" name="subject" value="1" id="1" form="userSearchRequest"></p>
+              <p>数学<input type="checkbox" class="mr-20" name="subject" value="2" id="2" form="userSearchRequest"></p>
+              <p>英語<input type="checkbox" class="mr-20" name="subject" value="3" id="3" form="userSearchRequest"></p>
             </div>
           </div>
         </div>
@@ -110,7 +110,7 @@
         <input type="submit" name="search_btn" value="検索" class="search_btn" form="userSearchRequest">
       </div>
       <div class="ta-c">
-        <input type="reset" value="リセット" class="reset_btn" form="userSearchRequest">
+        <input type="submit" value="リセット" class="reset_btn" form="userSearchRequest">
       </div>
     </div>
     <form action="{{ route('user.show') }}" method="get" id="userSearchRequest"></form>

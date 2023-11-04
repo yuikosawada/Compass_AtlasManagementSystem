@@ -28,6 +28,9 @@ input {
 .mb-20 {
     margin-bottom: 20px;
 }
+.mr-20{
+    margin-right: 20px;
+}
 .box-shadow {
     box-shadow: 1px 1px 10px 0px #00000040;
 }
@@ -232,6 +235,10 @@ input {
 .edit-modal-btn {
     justify-content: space-between;
 }
+.post-edit-btn{
+    padding: 6px 12px;
+    border-radius: 5px;
+}
 /* 掲示板 コメント */
 .comment_container {
     background: #fff;
@@ -332,12 +339,12 @@ input {
 .reserve_users_area {
     display: flex;
     flex-wrap: wrap;
-    width: 800px;
+    width: 900px;
     margin: 10px auto;
     height: 80vh;
     /* overflow: scroll; */
     padding: 10px;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     /* background: #fff; */
     border-radius: 5px;
 }
@@ -350,6 +357,7 @@ input {
     background-color: #fff;
     border-radius: 10px;
     padding: 1em;
+    margin-right: 20px;
 }
 .search_area_inner {
 width: 300px;
@@ -420,4 +428,11 @@ margin-top: 10px;
 }
 .reserve-table tr:nth-child(odd) td {
     background-color: #e5f6fa;
+}
+/* カレンダー */
+
+.calendar{
+    background-color: #fff;
+    padding: 90px 50px;
+    border-radius: 10px;
 }

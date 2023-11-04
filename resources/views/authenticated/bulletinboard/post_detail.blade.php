@@ -8,8 +8,8 @@
           <div>
           </div>
           <div>
-            <span class="edit-modal-open" post_title="{{ $post->post_title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</span>
-            <a href="{{ route('post.delete', ['id' => $post->id]) }}" onclick="return confirm('削除してよろしいですか？')">削除</a>
+            <span class="edit-modal-open btn-primary post-edit-btn" post_title="{{ $post->post_title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</span>
+            <a class="btn-danger post-edit-btn" href="{{ route('post.delete', ['id' => $post->id]) }}" onclick="return confirm('削除してよろしいですか？')">削除</a>
           </div>
         </div>
 
@@ -43,10 +43,11 @@
   <div class="w-50 p-3">
     <div class="comment_container border m-5">
       <div class="comment_area p-3">
+        @if ($errors->has('comment'))
+        <p class="error">{{ $errors->first('comment') }} </p> 
+        @endif
         <p class="m-0">コメントする</p>
         <textarea class="w-100" name="comment" form="commentRequest"></textarea>
-        @if ($errors->has('comment'))
-        <p class="error">{{ $errors->first('comment') }} </p> @endif
         <input type="hidden" name="post_id" form="commentRequest" value="{{ $post->id }}">
         <input type="submit" class="btn btn-primary" form="commentRequest" value="投稿">
         <form action="{{ route('comment.create') }}" method="post" id="commentRequest">{{ csrf_field() }}</form>

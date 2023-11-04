@@ -10,9 +10,10 @@
         <div class="modal-inner w-50 m-auto">
         <dt>予約日：</dt>  
         <dd class="reserve_date"></dd>
+        <input type="hidden" class="reserve_date" name="reserve_date">
         <dt>時間：</dt> 
         <dd class="reserve_part"></dd>
-        <p class="id"></p>
+        <input type="hidden" class="reserve_part" name="reservePart">
         <p class="">上記の予約をキャンセルしてもよろしいですか？</p>
         </div>
        

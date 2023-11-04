@@ -21,10 +21,10 @@ class CalendarsController extends Controller
     public function reserve(Request $request){
         DB::beginTransaction();
         try{
-            // dd($request);
             $getPart = $request->getPart;
             $getDate = $request->getData;
             // エラー $getDateと$getPartに入ってるものの数が合わない（$getPartに過ぎた日にちがふくまれてない）
+            dd($getPart);
             $reserveDays = array_filter(array_combine($getDate, $getPart));
             
             foreach($reserveDays as $key => $value){
@@ -40,16 +40,34 @@ class CalendarsController extends Controller
     }
 
     // 予約削除
-    public function delete($id)
+    public function delete(Request $request)
     {
-       
+     
 
-        dd($id);
 
         // ReserveSettingsのidとReserveSettingUersのreserve_settiing_idが一致し、かつ、ReserveSettingUersのuser_idとログイン中のユーザーのidが一致するレコードを削除
 
-        ReserveSettings::with('reserve_setting_users')->findOrFail($id)->delete();
-        return redirect()->route('calendar.general.show');
+        // ReserveSettings::with('reserve_setting_users')->findOrFail($id)->delete();
+        DB::beginTransaction();
+        try{
+            $reservePart = $request->reservePart;
+            $reserve_date = $request->reserve_date;
+            // エラー $getDateと$getPartに入ってるものの数が合わない（$getPartに過ぎた日にちがふくまれてない）
+            // $reserveDays = array_filter(array_combine($reserve_date, $reserve_part));
+            
+            // foreach($reserveDays as $key => $value){
+                $reserve_settings = ReserveSettings::where('setting_reserve', $reserve_date)->where('setting_part', $reservePart)->first();
+                // dd($reserve_settings);
+                // 予約リミット数を増やす
+                $reserve_settings->increment('limit_users');
+                // 削除
+                $reserve_settings->users()->detach(Auth::id());
+            // }
+            DB::commit();
+        }catch(\Exception $e){
+            DB::rollback();
+        }
+        return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
+
     }
-    // ここまで
 }

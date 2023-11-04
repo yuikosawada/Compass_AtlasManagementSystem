@@ -75,14 +75,14 @@ $(function () {
         $(".js-modal").fadeIn();
         var reserve_part = $(this).attr("reserve_part");
         var reserve_date = $(this).attr("reserve_date");
-        var id = $(this).attr('id');
-        // $(".modal-inner-title input").val(reserve_date);
-        // $(".modal-inner-body textarea").text(reserve_part);
-      $(".modal-inner .reserve_part").text("" + reserve_part + "");
-      $(".modal-inner .reserve_date").text("" + reserve_date + "");
-      // $(".modal-inner .id").text("" + id + "");
+        var reservePart = $(this).attr("reservePart");
+        // var reserve_date = $(this).attr("reserveDay");
+        
+      $(".modal-inner .reserve_part").text(reserve_part);
+      $(".modal-inner input.reserve_part").val(reservePart);
+      $(".modal-inner .reserve_date").text(reserve_date);
+      $(".modal-inner input.reserve_date").val(reserve_date);
       
-        $('.edit-modal-hidden').val(id);
         return false;
     });
     $(".js-modal-close").on("click", function () {
