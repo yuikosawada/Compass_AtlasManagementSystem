@@ -31,10 +31,10 @@ input {
 .mr-20 {
     margin-right: 20px;
 }
-.mt-30{
+.mt-30 {
     margin-top: 30px;
 }
-.bg-white{
+.bg-white {
     background: #fff;
 }
 .d-f {
@@ -49,6 +49,9 @@ input {
 }
 .box-shadow {
     box-shadow: #bbb 0px 4px 10px;
+}
+.fz-23 {
+    font-size: 23px;
 }
 /* サイドバー */
 .sidebar {
@@ -324,10 +327,9 @@ input {
 }
 
 /* 開く機能 */
-.content_sub_categories{
+.content_sub_categories {
     display: none;
 }
-
 
 /* ユーザー検索 */
 .reserve_users_area {

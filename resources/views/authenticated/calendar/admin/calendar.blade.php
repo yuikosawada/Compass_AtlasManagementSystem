@@ -3,7 +3,7 @@
 @section('content')
 <div class="w-75 m-auto bg-white box-shadow">
   <div class="w-75 m-auto pt-5 pb-5 calendar">
-    <p class="text-center">{{ $calendar->getTitle() }}</p>
+    <p class="text-center fz-23">{{ $calendar->getTitle() }}</p>
     <p>{!! $calendar->render() !!}</p>
   </div>
 </div>
