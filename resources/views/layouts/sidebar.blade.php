@@ -50,7 +50,7 @@
       </p>
       @show
     </div>
-    <div class="main-container">
+    <div class="main-container pt-5">
       @yield('content')
     </div>
   </div>

@@ -28,13 +28,16 @@ input {
 .mb-20 {
     margin-bottom: 20px;
 }
-.mr-20{
+.mr-20 {
     margin-right: 20px;
 }
-.box-shadow {
-    box-shadow: 1px 1px 10px 0px #00000040;
+.mt-30{
+    margin-top: 30px;
 }
-.d-f{
+.bg-white{
+    background: #fff;
+}
+.d-f {
     display: flex;
 }
 .f-d-column {
@@ -45,7 +48,6 @@ input {
     text-align: center;
 }
 .box-shadow {
-    /* background-color: #fff; */
     box-shadow: #bbb 0px 4px 10px;
 }
 /* サイドバー */
@@ -72,8 +74,8 @@ input {
 .login-logo {
     width: 160px;
     position: absolute;
-    top: 120px;
-    left: 43%;
+    top: 20%;
+    left: calc(50% - 80px);
 }
 
 /* トップページ */
@@ -100,6 +102,9 @@ input {
 }
 .calendar-td {
     min-width: 100px;
+}
+.calendar-body tr td p {
+    margin: 0;
 }
 .day_part {
     display: block;
@@ -235,7 +240,7 @@ input {
 .edit-modal-btn {
     justify-content: space-between;
 }
-.post-edit-btn{
+.post-edit-btn {
     padding: 6px 12px;
     border-radius: 5px;
 }
@@ -290,7 +295,7 @@ input {
     background: transparent;
     color: #000;
     border-bottom: 1px solid #ccc;
-    display: block;
+    /* display: block; */
     width: 85%;
     margin-left: 10px;
     text-align: left;
@@ -319,21 +324,10 @@ input {
 }
 
 /* 開く機能 */
-.sub_categories {
+.content_sub_categories{
     display: none;
 }
-.checkbox {
-    display: none;
-}
-.open {
-    display: none;
-}
-.checkbox:checked + .open {
-    display: block;
-}
-.checkbox:checked + .close {
-    display: none;
-}
+
 
 /* ユーザー検索 */
 .reserve_users_area {
@@ -360,12 +354,12 @@ input {
     margin-right: 20px;
 }
 .search_area_inner {
-width: 300px;
+    width: 300px;
 }
-.search_area_inner *{
-margin-top: 10px;
+.search_area_inner * {
+    margin-top: 10px;
 }
-.search_area_label{
+.search_area_label {
     color: #495980;
     /* font-size: 25px; */
 }
@@ -401,7 +395,7 @@ margin-top: 10px;
 .subject_inner {
     display: none;
 }
-.subject_edit_subjects{
+.subject_edit_subjects {
     margin-right: 10px;
 }
 
@@ -431,8 +425,8 @@ margin-top: 10px;
 }
 /* カレンダー */
 
-.calendar{
+.calendar {
     background-color: #fff;
-    padding: 90px 50px;
+    /* padding: 25px 50px; */
     border-radius: 10px;
 }

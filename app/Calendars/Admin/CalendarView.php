@@ -16,7 +16,7 @@ class CalendarView{
 
   public function render(){
     $html = [];
-    $html[] = '<div class="calendar text-center box-shadow">';
+    $html[] = '<div class="calendar text-center">';
     $html[] = '<table class="table m-auto border">';
     $html[] = '<thead>';
     $html[] = '<tr>';
@@ -29,7 +29,7 @@ class CalendarView{
     $html[] = '<th class="border">日</th>';
     $html[] = '</tr>';
     $html[] = '</thead>';
-    $html[] = '<tbody>';
+    $html[] = '<tbody class="calendar-body">';
 
     $weeks = $this->getWeeks();
 

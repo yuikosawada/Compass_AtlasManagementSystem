@@ -53,7 +53,7 @@ $(function () {
             })
             .fail(function () {});
     });
-  
+
     //投稿編集モーダル
     $(".edit-modal-open").on("click", function () {
         $(".js-modal").fadeIn();
@@ -69,7 +69,7 @@ $(function () {
         $(".js-modal").fadeOut();
         return false;
     });
-  
+
     // 予約キャンセルモーダル
     $(".cancel-modal-open").on("click", function () {
         $(".js-modal").fadeIn();
@@ -77,16 +77,40 @@ $(function () {
         var reserve_date = $(this).attr("reserve_date");
         var reservePart = $(this).attr("reservePart");
         // var reserve_date = $(this).attr("reserveDay");
-        
-      $(".modal-inner .reserve_part").text(reserve_part);
-      $(".modal-inner input.reserve_part").val(reservePart);
-      $(".modal-inner .reserve_date").text(reserve_date);
-      $(".modal-inner input.reserve_date").val(reserve_date);
-      
+
+        $(".modal-inner .reserve_part").text(reserve_part);
+        $(".modal-inner input.reserve_part").val(reservePart);
+        $(".modal-inner .reserve_date").text(reserve_date);
+        $(".modal-inner input.reserve_date").val(reserve_date);
+
         return false;
     });
     $(".js-modal-close").on("click", function () {
         $(".js-modal").fadeOut();
         return false;
+    });
+
+    // アコーディオンメニュー
+    $(document).ready(function() {
+        $(".accordion").each(function() {
+            var content = $(this).find(".content_sub_categories");
+            var downArrow = $(this).find(".down-arrow");
+            var upArrow = $(this).find(".up-arrow");
+
+            // 初期状態ではup-arrowを非表示にする
+            upArrow.hide();
+
+            $(this).click(function() {
+                if (content.css("display") === "none" || content.css("display") === "none") {
+                    content.show();
+                    downArrow.hide();
+                    upArrow.show();
+                } else {
+                    content.hide();
+                    downArrow.show();
+                    upArrow.hide();
+                }
+            });
+        });
     });
 });
