@@ -53,6 +53,9 @@ input {
 .fz-23 {
     font-size: 23px;
 }
+.space-between{
+    justify-content: space-between;
+}
 /* サイドバー */
 .sidebar {
     width: 200px;
@@ -60,9 +63,11 @@ input {
     background-color: #03aad2;
     font-weight: bold;
     padding: 20px 5px;
+    position: fixed;
 }
 .main-container {
     width: 100%;
+    padding-left: 200px;
 }
 .sidebar p a {
     color: #fff;
@@ -217,6 +222,7 @@ input {
 }
 
 /* 掲示板 詳細画面 */
+
 .contributor {
     font-size: 12px;
     color: #999;
@@ -363,13 +369,12 @@ input {
 }
 .search_area_label {
     color: #495980;
-    /* font-size: 25px; */
 }
 .search_conditions span {
     cursor: pointer;
 }
-.search_conditions_inner {
-    /* background: #fff; */
+.border_bottom{
+    border-bottom: 1px solid #bcbcbc;
 }
 .search_gray_box {
     background-color: #e0e5e9;
@@ -400,6 +405,20 @@ input {
 .subject_edit_subjects {
     margin-right: 10px;
 }
+.up-arrow-none{
+    display: none;
+}
+.down-arrow-none{
+    display: none;
+}
+.up-arrow
+.down-arrow{
+    font-size: 20px;
+}
+.down-arrow{
+    display: block;
+}
+
 
 /* 予約カレンダー */
 .passed-day {

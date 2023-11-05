@@ -75,8 +75,12 @@
         </select>
       </div>
       <div class="">
-        <p class="m-0 search_conditions search_area_label"><span>検索条件の追加</span></p>
-        <div class="search_conditions_inner">
+          <p class="m-0 border_bottom search_conditions search_area_label d-flex space-between "><span>検索条件の追加</span>
+          <i class="fa-solid fa-chevron-down down-arrow  down-arrow-none" style="color: #404040;"></i>
+          <i class="fa-solid fa-chevron-up up-arrow up-arrow-none" style="color: #404040;"></i>
+        </p>
+         
+        <div class="search_conditions_inner" style="display: none;">
           <div class="f-d-column">
             <label class="search_area_label">性別</label>
             <div>
